@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f337cf13aa94e87892931ebaaa42016" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.banka" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.djelatnost" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.dms_file" Width="1.5" PointX="12.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.dms_status" Width="1.5" PointX="10.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.dms_type" Width="1.5" PointX="10.25" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.drzava" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj" Width="1.5" PointX="8" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj_arhiva_dnevnik" Width="1.5" PointX="14.75" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj_arhiva_dokument" Width="1.5" PointX="12.5" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj_dnevnik_def" Width="1.5" PointX="12.5" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj_evidencija" Width="1.5" PointX="10.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj_pozicija" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izvjestaj_prethodni" Width="1.5" PointX="10.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent" Width="1.5" PointX="8" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent_racun" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent_tip" Width="1.5" PointX="5.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent_velicina" Width="1.5" PointX="5.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent_vlasnik" Width="1.5" PointX="13.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent_zastupnik" Width="1.5" PointX="10.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.knjiga" Width="1.5" PointX="10.25" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.knjiga_dnevnik" Width="1.5" PointX="12.5" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.log" Width="1.5" PointX="10.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.mailacc" Width="1.5" PointX="10.25" PointY="38.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.operater" Width="1.5" PointX="8" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.opstina" Width="1.5" PointX="5.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.podesavanja" Width="1.5" PointX="10.25" PointY="42.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.revizija_scheme" Width="1.5" PointX="10.25" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.revizorski_tim" Width="1.5" PointX="5.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.templates" Width="1.5" PointX="14.75" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.templates_type" Width="1.5" PointX="12.5" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tim_funkcija" Width="1.5" PointX="3.5" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Bilans_stanja_view" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klijent___djelatnost___sifra___opstina___drzava" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_banka_drzava" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_korisnik_zr_banka" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_djelatnost" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dms_file_dms_status" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dms_file_dms_type" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dms_file_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dms_file_knjiga" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dms_file_operater" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dms_file_revizija_scheme" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_drzava" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_drzava1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_korisnik_vlasnik_drzava" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_korisnik_zastupnik_drzava" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_arhiva_dokument_izvjestaj" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_dnevnik_izvjestaj" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_evidencija_izvjestaj" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_prethodni_izvjestaj" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_arhiva_dokument_knjiga" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izvjestaj_prethodni_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_glavnaknjiga_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_klijent_tip" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_klijent_velicina" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_opstina" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_opstina1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_racun_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_revizorski_tim" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_revizorski_tim1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_revizorski_tim2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_vlasnik_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klijent_zastupnik_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_log_klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_korisnik_vl_korisnik_tip1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_knjiga_dnevnik_knjiga" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_log_operater" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_mailacc_operater" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_operater_revizorski_tim" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_operater_revizorski_tim1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_podesavanja_operater" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_templates_type_revizija_scheme" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_revizorski_tim_tim_funkcija" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_templates_templates_type" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.dms_veza" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,2957 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="banka">
+          <Key>
+            <PropertyRef Name="id_banka" />
+          </Key>
+          <Property Name="id_banka" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="skraceni" Type="varchar" MaxLength="15" />
+          <Property Name="prefiks" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="broj_racuna" Type="varchar" MaxLength="25" />
+          <Property Name="plata_spisak" Type="bit" Nullable="false" />
+          <Property Name="swift" Type="nvarchar" MaxLength="11" />
+          <Property Name="bankid" Type="nvarchar" MaxLength="100" />
+          <Property Name="adresa" Type="nvarchar" MaxLength="100" />
+          <Property Name="grad" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_drzava" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="djelatnost">
+          <Key>
+            <PropertyRef Name="id_djelatnost" />
+          </Key>
+          <Property Name="id_djelatnost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sifra" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dms_file">
+          <Key>
+            <PropertyRef Name="id_dms_file" />
+          </Key>
+          <Property Name="id_dms_file" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+          <Property Name="id_tip" Type="int" Nullable="false" />
+          <Property Name="id_operater" Type="int" />
+          <Property Name="id_knjiga" Type="int" />
+          <Property Name="id_revizija_scheme" Type="nvarchar" MaxLength="10" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="extension" Type="nvarchar" MaxLength="20" />
+          <Property Name="guid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="guid_parent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="is_editable" Type="bit" />
+          <Property Name="id_status" Type="nvarchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="dms_status">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dms_type">
+          <Key>
+            <PropertyRef Name="id_dms_type" />
+          </Key>
+          <Property Name="id_dms_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dms_veza">
+          <Key>
+            <PropertyRef Name="id_1" />
+            <PropertyRef Name="id_2" />
+          </Key>
+          <Property Name="id_1" Type="int" Nullable="false" />
+          <Property Name="id_2" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="drzava">
+          <Key>
+            <PropertyRef Name="id_drzava" />
+          </Key>
+          <Property Name="id_drzava" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="dnevnica" Type="money" />
+          <Property Name="sifra" Type="nvarchar" MaxLength="3" />
+          <Property Name="sifra_alfa" Type="nvarchar" MaxLength="2" />
+          <Property Name="oznaka" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="izvjestaj">
+          <Key>
+            <PropertyRef Name="id_izvjestaj" />
+          </Key>
+          <Property Name="id_izvjestaj" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="report_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="lang_naziv" Type="nvarchar(max)" />
+          <Property Name="aktivan" Type="bit" />
+        </EntityType>
+        <EntityType Name="izvjestaj_arhiva_dnevnik">
+          <Key>
+            <PropertyRef Name="id_dnevnik" />
+          </Key>
+          <Property Name="id_dnevnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_dnevnik_def" Type="int" Nullable="false" />
+          <Property Name="vrijednost" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="id_arhiva_dokument" Type="int" Nullable="false" />
+          <Property Name="vrijednost_prethodna" Type="decimal" Precision="25" Scale="10" />
+        </EntityType>
+        <EntityType Name="izvjestaj_arhiva_dokument">
+          <Key>
+            <PropertyRef Name="id_arhiva_dokument" />
+          </Key>
+          <Property Name="id_arhiva_dokument" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_knjiga" Type="int" Nullable="false" />
+          <Property Name="id_iskaz" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="godina" Type="int" />
+        </EntityType>
+        <EntityType Name="izvjestaj_dnevnik_def">
+          <Key>
+            <PropertyRef Name="id_dnevnik_def" />
+          </Key>
+          <Property Name="id_dnevnik_def" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_dnevnik" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_izvjestaj" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="info1" Type="nvarchar" MaxLength="50" />
+          <Property Name="info2" Type="nvarchar" MaxLength="50" />
+          <Property Name="computed" Type="varchar(max)" />
+          <Property Name="style_bold" Type="bit" Nullable="false" />
+          <Property Name="lang_naziv" Type="nvarchar(max)" />
+          <Property Name="lang_info1" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="izvjestaj_evidencija">
+          <Key>
+            <PropertyRef Name="id_dnevnik" />
+            <PropertyRef Name="id_izvjestaj" />
+            <PropertyRef Name="godina" />
+          </Key>
+          <Property Name="id_dnevnik" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_izvjestaj" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="godina" Type="smallint" Nullable="false" />
+          <Property Name="iznos" Type="money" Nullable="false" />
+          <Property Name="pokrice" Type="money" />
+        </EntityType>
+        <EntityType Name="izvjestaj_pozicija">
+          <Key>
+            <PropertyRef Name="id_pozicija" />
+          </Key>
+          <Property Name="id_pozicija" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="computed" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="izvjestaj_prethodni">
+          <Key>
+            <PropertyRef Name="id_izvjestaj" />
+            <PropertyRef Name="godina" />
+            <PropertyRef Name="id_dnevnik" />
+          </Key>
+          <Property Name="id_izvjestaj" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="godina" Type="int" Nullable="false" />
+          <Property Name="id_dnevnik" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="vrijednost" Type="money" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klijent">
+          <Key>
+            <PropertyRef Name="id_klijent" />
+          </Key>
+          <Property Name="id_klijent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_tip" Type="int" />
+          <Property Name="id_opstina" Type="smallint" />
+          <Property Name="id_djelatnost" Type="int" />
+          <Property Name="id_velicina" Type="int" />
+          <Property Name="id_drzava" Type="tinyint" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="adresa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PIB" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pdv" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="puni_naziv" Type="nvarchar(max)" />
+          <Property Name="broj_rjesenja" Type="nvarchar" MaxLength="20" />
+          <Property Name="datum_rjesenja" Type="date" />
+          <Property Name="datum_gasenja" Type="date" />
+          <Property Name="grad" Type="nvarchar" MaxLength="50" />
+          <Property Name="mjesto" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefon" Type="nvarchar" MaxLength="20" />
+          <Property Name="fax" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" />
+          <Property Name="posta_broj" Type="nvarchar" MaxLength="20" />
+          <Property Name="DMS_root" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_ime" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_JMBG" Type="nvarchar" MaxLength="30" />
+          <Property Name="direktor_rodj" Type="date" />
+          <Property Name="direktor_otac" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_majka" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_majkaDjev" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_brojlk" Type="nchar" MaxLength="10" />
+          <Property Name="direktor_drzava_id" Type="tinyint" />
+          <Property Name="direktor_opstina_id" Type="smallint" />
+          <Property Name="direktor_mjesto" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_adresa" Type="nvarchar" MaxLength="50" />
+          <Property Name="direktor_ogranicenje" Type="nvarchar" MaxLength="500" />
+          <Property Name="is_korisnik" Type="bit" />
+          <Property Name="kapital_novac" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="kapital_stvari" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="kapital_prava" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="id_revizor" Type="int" />
+          <Property Name="id_rukovodilac" Type="int" />
+          <Property Name="id_asistent" Type="int" />
+          <Property Name="erp_server" Type="nvarchar" MaxLength="50" />
+          <Property Name="erp_sqluser" Type="nvarchar" MaxLength="50" />
+          <Property Name="erp_sqlpass" Type="nvarchar" MaxLength="50" />
+          <Property Name="erp_dbname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="klijent_racun">
+          <Key>
+            <PropertyRef Name="id_racun" />
+          </Key>
+          <Property Name="id_racun" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+          <Property Name="id_banka" Type="tinyint" Nullable="false" />
+          <Property Name="broj" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="is_devizni" Type="bit" Nullable="false" />
+          <Property Name="order_id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klijent_tip">
+          <Key>
+            <PropertyRef Name="id_tip" />
+          </Key>
+          <Property Name="id_tip" Type="int" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klijent_velicina">
+          <Key>
+            <PropertyRef Name="id_velicina" />
+          </Key>
+          <Property Name="id_velicina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klijent_vlasnik">
+          <Key>
+            <PropertyRef Name="id_vlasnik" />
+          </Key>
+          <Property Name="id_vlasnik" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+          <Property Name="id_tip" Type="int" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="maticni" Type="varchar" MaxLength="50" />
+          <Property Name="is_foreign" Type="bit" Nullable="false" />
+          <Property Name="procenat" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="id_drzava" Type="tinyint" />
+          <Property Name="opstina" Type="nvarchar" MaxLength="100" />
+          <Property Name="mjesto" Type="nvarchar" MaxLength="100" />
+          <Property Name="adresa" Type="nchar" MaxLength="100" />
+          <Property Name="br_dok" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="klijent_zastupnik">
+          <Key>
+            <PropertyRef Name="id_zastupnik" />
+          </Key>
+          <Property Name="id_zastupnik" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+          <Property Name="ime_prez" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="maticni" Type="nvarchar" MaxLength="100" />
+          <Property Name="br_dok" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_drzava" Type="tinyint" />
+          <Property Name="opstina" Type="nvarchar" MaxLength="100" />
+          <Property Name="mjesto" Type="nvarchar" MaxLength="100" />
+          <Property Name="adresa" Type="nvarchar" MaxLength="100" />
+          <Property Name="opis_ogran" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="knjiga">
+          <Key>
+            <PropertyRef Name="id_knjiga" />
+          </Key>
+          <Property Name="id_knjiga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+          <Property Name="godina" Type="int" Nullable="false" />
+          <Property Name="datum_od" Type="date" />
+          <Property Name="datum_do" Type="date" />
+          <Property Name="opis" Type="nvarchar" MaxLength="1000" />
+          <Property Name="is_locked" Type="bit" />
+        </EntityType>
+        <EntityType Name="knjiga_dnevnik">
+          <Key>
+            <PropertyRef Name="id_knjiga_dnevnik" />
+          </Key>
+          <Property Name="id_knjiga_dnevnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_knjiga" Type="int" Nullable="false" />
+          <Property Name="broj_naloga" Type="int" />
+          <Property Name="datum" Type="datetime" Nullable="false" />
+          <Property Name="vrsta" Type="nvarchar" MaxLength="500" />
+          <Property Name="konto_broj" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="konto_naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="duguje" Type="decimal" Precision="25" Scale="10" Nullable="false" />
+          <Property Name="potrazuje" Type="decimal" Precision="25" Scale="10" Nullable="false" />
+          <Property Name="opis" Type="nvarchar" MaxLength="1000" />
+          <Property Name="sifra_partner" Type="int" />
+          <Property Name="naziv_partner" Type="nvarchar" MaxLength="200" />
+          <Property Name="sifra_rj" Type="nvarchar" MaxLength="50" />
+          <Property Name="naziv_rj" Type="nvarchar" MaxLength="500" />
+          <Property Name="konto_grupa" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="konto_podgrupa" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="konto_klasa" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="id_log" />
+          </Key>
+          <Property Name="id_log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_operater" Type="int" />
+          <Property Name="id_klijent" Type="int" />
+          <Property Name="datum" Type="datetime" Nullable="false" />
+          <Property Name="tekst" Type="nvarchar(max)" />
+          <Property Name="modul" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mailacc">
+          <Key>
+            <PropertyRef Name="id_mailacc" />
+          </Key>
+          <Property Name="id_mailacc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_operater" Type="int" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="enablessl" Type="bit" Nullable="false" />
+          <Property Name="port" Type="int" Nullable="false" />
+          <Property Name="host" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="operater">
+          <Key>
+            <PropertyRef Name="id_operater" />
+          </Key>
+          <Property Name="id_operater" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_revizorski_tim" Type="int" />
+          <Property Name="id_kontrolor" Type="int" />
+          <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ime" Type="nvarchar" MaxLength="30" />
+          <Property Name="prezime" Type="nvarchar" MaxLength="30" />
+          <Property Name="password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="is_admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="opstina">
+          <Key>
+            <PropertyRef Name="id_opstina" />
+          </Key>
+          <Property Name="id_opstina" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sifra" Type="int" Nullable="false" />
+          <Property Name="prirez_stopa" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="prirez_racun" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="sifra_m4" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="podesavanja">
+          <Key>
+            <PropertyRef Name="id_podesavanja" />
+          </Key>
+          <Property Name="id_podesavanja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_operater" Type="int" Nullable="false" />
+          <Property Name="use_ftp" Type="bit" />
+          <Property Name="dms_root" Type="nvarchar" MaxLength="100" />
+          <Property Name="dms_ftp_user" Type="nvarchar" MaxLength="50" />
+          <Property Name="dms_ftp_pass" Type="nvarchar" MaxLength="50" />
+          <Property Name="dms_ftp_server" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="revizija_scheme">
+          <Key>
+            <PropertyRef Name="id_revizija_scheme" />
+          </Key>
+          <Property Name="id_revizija_scheme" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="parent" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="orderby" Type="int" />
+          <Property Name="is_folder" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="revizorski_tim">
+          <Key>
+            <PropertyRef Name="id_revizorski_tim" />
+          </Key>
+          <Property Name="id_revizorski_tim" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_funkcija" Type="int" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="licenca_dms" Type="nvarchar" MaxLength="50" />
+          <Property Name="potpis" Type="image" />
+        </EntityType>
+        <EntityType Name="templates">
+          <Key>
+            <PropertyRef Name="id_template" />
+          </Key>
+          <Property Name="id_template" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_template_type" Type="nvarchar" MaxLength="10" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="200" />
+          <Property Name="rtf" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="templates_type">
+          <Key>
+            <PropertyRef Name="id_templates_type" />
+          </Key>
+          <Property Name="id_templates_type" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_revizija_scheme" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tim_funkcija">
+          <Key>
+            <PropertyRef Name="id_funkcija" />
+          </Key>
+          <Property Name="id_funkcija" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Revizija.dbo.Bilans_stanja_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Bilans_stanja_view">
+          <Key>
+            <PropertyRef Name="naziv" />
+            <PropertyRef Name="Redni broj" />
+            <PropertyRef Name="id_klijent" />
+            <PropertyRef Name="godina" />
+            <PropertyRef Name="Tip" />
+          </Key>
+          <Property Name="Grupa" Type="nvarchar" MaxLength="50" />
+          <Property Name="naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Redni broj" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="vrijednost" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="Prethodna" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="id_klijent" Type="int" Nullable="false" />
+          <Property Name="godina" Type="int" Nullable="false" />
+          <Property Name="Tip" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Revizija.dbo.klijent - djelatnost - sifra - opstina - drzava' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="klijent - djelatnost - sifra - opstina - drzava">
+          <Key>
+            <PropertyRef Name="ID_klijent" />
+            <PropertyRef Name="Naziv" />
+          </Key>
+          <Property Name="ID_klijent" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sifra" Type="varchar" MaxLength="8" />
+          <Property Name="Djelatnost" Type="nvarchar(max)" />
+          <Property Name="Opstina" Type="varchar" MaxLength="20" />
+          <Property Name="Drzava" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_banka_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="banka" Type="Self.banka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="banka">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_dms_status">
+          <End Role="dms_status" Type="Self.dms_status" Multiplicity="0..1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dms_status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_dms_type">
+          <End Role="dms_type" Type="Self.dms_type" Multiplicity="1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dms_type">
+              <PropertyRef Name="id_dms_type" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_tip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_knjiga">
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="knjiga">
+              <PropertyRef Name="id_knjiga" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_knjiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="0..1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_revizija_scheme">
+          <End Role="revizija_scheme" Type="Self.revizija_scheme" Multiplicity="0..1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizija_scheme">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_veza_dms_file">
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="1" />
+          <End Role="dms_veza" Type="Self.dms_veza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dms_file">
+              <PropertyRef Name="id_dms_file" />
+            </Principal>
+            <Dependent Role="dms_veza">
+              <PropertyRef Name="id_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_veza_dms_file1">
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="1" />
+          <End Role="dms_veza" Type="Self.dms_veza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dms_file">
+              <PropertyRef Name="id_dms_file" />
+            </Principal>
+            <Dependent Role="dms_veza">
+              <PropertyRef Name="id_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_glavnaknjiga_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="knjiga">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def">
+          <End Role="izvjestaj_arhiva_dokument" Type="Self.izvjestaj_arhiva_dokument" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="izvjestaj_arhiva_dnevnik" Type="Self.izvjestaj_arhiva_dnevnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj_arhiva_dokument">
+              <PropertyRef Name="id_arhiva_dokument" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dnevnik">
+              <PropertyRef Name="id_arhiva_dokument" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1">
+          <End Role="izvjestaj_dnevnik_def" Type="Self.izvjestaj_dnevnik_def" Multiplicity="1" />
+          <End Role="izvjestaj_arhiva_dnevnik" Type="Self.izvjestaj_arhiva_dnevnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj_dnevnik_def">
+              <PropertyRef Name="id_dnevnik_def" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dnevnik">
+              <PropertyRef Name="id_dnevnik_def" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dokument_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1" />
+          <End Role="izvjestaj_arhiva_dokument" Type="Self.izvjestaj_arhiva_dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dokument">
+              <PropertyRef Name="id_iskaz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dokument_knjiga">
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="izvjestaj_arhiva_dokument" Type="Self.izvjestaj_arhiva_dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="knjiga">
+              <PropertyRef Name="id_knjiga" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dokument">
+              <PropertyRef Name="id_knjiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_dnevnik_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="izvjestaj_dnevnik_def" Type="Self.izvjestaj_dnevnik_def" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_dnevnik_def">
+              <PropertyRef Name="id_izvjestaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_evidencija_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1" />
+          <End Role="izvjestaj_evidencija" Type="Self.izvjestaj_evidencija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_evidencija">
+              <PropertyRef Name="id_izvjestaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_prethodni_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1" />
+          <End Role="izvjestaj_prethodni" Type="Self.izvjestaj_prethodni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_prethodni">
+              <PropertyRef Name="id_izvjestaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_prethodni_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="izvjestaj_prethodni" Type="Self.izvjestaj_prethodni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="izvjestaj_prethodni">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_djelatnost">
+          <End Role="djelatnost" Type="Self.djelatnost" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="djelatnost">
+              <PropertyRef Name="id_djelatnost" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_djelatnost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_drzava1">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="direktor_drzava_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_klijent_tip">
+          <End Role="klijent_tip" Type="Self.klijent_tip" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent_tip">
+              <PropertyRef Name="id_tip" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_tip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_klijent_velicina">
+          <End Role="klijent_velicina" Type="Self.klijent_velicina" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent_velicina">
+              <PropertyRef Name="id_velicina" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_velicina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_opstina">
+          <End Role="opstina" Type="Self.opstina" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="opstina">
+              <PropertyRef Name="id_opstina" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_opstina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_opstina1">
+          <End Role="opstina" Type="Self.opstina" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="opstina">
+              <PropertyRef Name="id_opstina" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="direktor_opstina_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_racun_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="klijent_racun" Type="Self.klijent_racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="klijent_racun">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_revizorski_tim">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_revizor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_revizorski_tim1">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_rukovodilac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_revizorski_tim2">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_asistent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_vlasnik_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="klijent_vlasnik" Type="Self.klijent_vlasnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="klijent_vlasnik">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_zastupnik_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="klijent_zastupnik" Type="Self.klijent_zastupnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="klijent_zastupnik">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_knjiga_dnevnik_knjiga">
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="knjiga_dnevnik" Type="Self.knjiga_dnevnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="knjiga">
+              <PropertyRef Name="id_knjiga" />
+            </Principal>
+            <Dependent Role="knjiga_dnevnik">
+              <PropertyRef Name="id_knjiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_vl_korisnik_tip1">
+          <End Role="klijent_tip" Type="Self.klijent_tip" Multiplicity="1" />
+          <End Role="klijent_vlasnik" Type="Self.klijent_vlasnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent_tip">
+              <PropertyRef Name="id_tip" />
+            </Principal>
+            <Dependent Role="klijent_vlasnik">
+              <PropertyRef Name="id_tip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_vlasnik_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent_vlasnik" Type="Self.klijent_vlasnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent_vlasnik">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_zastupnik_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent_zastupnik" Type="Self.klijent_zastupnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent_zastupnik">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_zr_banka">
+          <End Role="banka" Type="Self.banka" Multiplicity="1" />
+          <End Role="klijent_racun" Type="Self.klijent_racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="banka">
+              <PropertyRef Name="id_banka" />
+            </Principal>
+            <Dependent Role="klijent_racun">
+              <PropertyRef Name="id_banka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_log_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="0..1" />
+          <End Role="log" Type="Self.log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="log">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_log_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="0..1" />
+          <End Role="log" Type="Self.log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="log">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mailacc_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="1" />
+          <End Role="mailacc" Type="Self.mailacc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="mailacc">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_operater_revizorski_tim">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="operater" Type="Self.operater" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="operater">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_operater_revizorski_tim1">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="operater" Type="Self.operater" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="operater">
+              <PropertyRef Name="id_kontrolor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_podesavanja_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="podesavanja" Type="Self.podesavanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="podesavanja">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_revizorski_tim_tim_funkcija">
+          <End Role="tim_funkcija" Type="Self.tim_funkcija" Multiplicity="1" />
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tim_funkcija">
+              <PropertyRef Name="id_funkcija" />
+            </Principal>
+            <Dependent Role="revizorski_tim">
+              <PropertyRef Name="id_funkcija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_templates_templates_type">
+          <End Role="templates_type" Type="Self.templates_type" Multiplicity="0..1" />
+          <End Role="templates" Type="Self.templates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="templates_type">
+              <PropertyRef Name="id_templates_type" />
+            </Principal>
+            <Dependent Role="templates">
+              <PropertyRef Name="id_template_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_templates_type_revizija_scheme">
+          <End Role="revizija_scheme" Type="Self.revizija_scheme" Multiplicity="0..1" />
+          <End Role="templates_type" Type="Self.templates_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizija_scheme">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Principal>
+            <Dependent Role="templates_type">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="banka" EntityType="Self.banka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="djelatnost" EntityType="Self.djelatnost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dms_file" EntityType="Self.dms_file" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dms_status" EntityType="Self.dms_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dms_type" EntityType="Self.dms_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dms_veza" EntityType="Self.dms_veza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="drzava" EntityType="Self.drzava" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj" EntityType="Self.izvjestaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj_arhiva_dnevnik" EntityType="Self.izvjestaj_arhiva_dnevnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj_arhiva_dokument" EntityType="Self.izvjestaj_arhiva_dokument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj_dnevnik_def" EntityType="Self.izvjestaj_dnevnik_def" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj_evidencija" EntityType="Self.izvjestaj_evidencija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj_pozicija" EntityType="Self.izvjestaj_pozicija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izvjestaj_prethodni" EntityType="Self.izvjestaj_prethodni" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klijent" EntityType="Self.klijent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klijent_racun" EntityType="Self.klijent_racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klijent_tip" EntityType="Self.klijent_tip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klijent_velicina" EntityType="Self.klijent_velicina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klijent_vlasnik" EntityType="Self.klijent_vlasnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klijent_zastupnik" EntityType="Self.klijent_zastupnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="knjiga" EntityType="Self.knjiga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="knjiga_dnevnik" EntityType="Self.knjiga_dnevnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="log" EntityType="Self.log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mailacc" EntityType="Self.mailacc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="operater" EntityType="Self.operater" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="opstina" EntityType="Self.opstina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="podesavanja" EntityType="Self.podesavanja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="revizija_scheme" EntityType="Self.revizija_scheme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="revizorski_tim" EntityType="Self.revizorski_tim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="templates" EntityType="Self.templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="templates_type" EntityType="Self.templates_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tim_funkcija" EntityType="Self.tim_funkcija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bilans_stanja_view" EntityType="Self.Bilans_stanja_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Bilans_stanja_view].[Grupa] AS [Grupa], 
+    [Bilans_stanja_view].[naziv] AS [naziv], 
+    [Bilans_stanja_view].[Redni broj] AS [Redni broj], 
+    [Bilans_stanja_view].[vrijednost] AS [vrijednost], 
+    [Bilans_stanja_view].[Prethodna] AS [Prethodna], 
+    [Bilans_stanja_view].[id_klijent] AS [id_klijent], 
+    [Bilans_stanja_view].[godina] AS [godina], 
+    [Bilans_stanja_view].[Tip] AS [Tip]
+    FROM [dbo].[Bilans_stanja_view] AS [Bilans_stanja_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="klijent - djelatnost - sifra - opstina - drzava" EntityType="Self.klijent - djelatnost - sifra - opstina - drzava" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [klijent - djelatnost - sifra - opstina - drzava].[ID_klijent] AS [ID_klijent], 
+    [klijent - djelatnost - sifra - opstina - drzava].[Naziv] AS [Naziv], 
+    [klijent - djelatnost - sifra - opstina - drzava].[Sifra] AS [Sifra], 
+    [klijent - djelatnost - sifra - opstina - drzava].[Djelatnost] AS [Djelatnost], 
+    [klijent - djelatnost - sifra - opstina - drzava].[Opstina] AS [Opstina], 
+    [klijent - djelatnost - sifra - opstina - drzava].[Drzava] AS [Drzava]
+    FROM [dbo].[klijent - djelatnost - sifra - opstina - drzava] AS [klijent - djelatnost - sifra - opstina - drzava]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_banka_drzava" Association="Self.FK_banka_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="banka" EntitySet="banka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_dms_status" Association="Self.FK_dms_file_dms_status">
+            <End Role="dms_status" EntitySet="dms_status" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_dms_type" Association="Self.FK_dms_file_dms_type">
+            <End Role="dms_type" EntitySet="dms_type" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_klijent" Association="Self.FK_dms_file_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_knjiga" Association="Self.FK_dms_file_knjiga">
+            <End Role="knjiga" EntitySet="knjiga" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_operater" Association="Self.FK_dms_file_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_revizija_scheme" Association="Self.FK_dms_file_revizija_scheme">
+            <End Role="revizija_scheme" EntitySet="revizija_scheme" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_veza_dms_file" Association="Self.FK_dms_veza_dms_file">
+            <End Role="dms_file" EntitySet="dms_file" />
+            <End Role="dms_veza" EntitySet="dms_veza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_veza_dms_file1" Association="Self.FK_dms_veza_dms_file1">
+            <End Role="dms_file" EntitySet="dms_file" />
+            <End Role="dms_veza" EntitySet="dms_veza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_glavnaknjiga_klijent" Association="Self.FK_glavnaknjiga_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="knjiga" EntitySet="knjiga" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def" Association="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def">
+            <End Role="izvjestaj_arhiva_dokument" EntitySet="izvjestaj_arhiva_dokument" />
+            <End Role="izvjestaj_arhiva_dnevnik" EntitySet="izvjestaj_arhiva_dnevnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1" Association="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1">
+            <End Role="izvjestaj_dnevnik_def" EntitySet="izvjestaj_dnevnik_def" />
+            <End Role="izvjestaj_arhiva_dnevnik" EntitySet="izvjestaj_arhiva_dnevnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dokument_izvjestaj" Association="Self.FK_izvjestaj_arhiva_dokument_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_arhiva_dokument" EntitySet="izvjestaj_arhiva_dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dokument_knjiga" Association="Self.FK_izvjestaj_arhiva_dokument_knjiga">
+            <End Role="knjiga" EntitySet="knjiga" />
+            <End Role="izvjestaj_arhiva_dokument" EntitySet="izvjestaj_arhiva_dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_dnevnik_izvjestaj" Association="Self.FK_izvjestaj_dnevnik_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_dnevnik_def" EntitySet="izvjestaj_dnevnik_def" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_evidencija_izvjestaj" Association="Self.FK_izvjestaj_evidencija_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_evidencija" EntitySet="izvjestaj_evidencija" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_prethodni_izvjestaj" Association="Self.FK_izvjestaj_prethodni_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_prethodni" EntitySet="izvjestaj_prethodni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_prethodni_klijent" Association="Self.FK_izvjestaj_prethodni_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="izvjestaj_prethodni" EntitySet="izvjestaj_prethodni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_djelatnost" Association="Self.FK_klijent_djelatnost">
+            <End Role="djelatnost" EntitySet="djelatnost" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_drzava" Association="Self.FK_klijent_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_drzava1" Association="Self.FK_klijent_drzava1">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_klijent_tip" Association="Self.FK_klijent_klijent_tip">
+            <End Role="klijent_tip" EntitySet="klijent_tip" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_klijent_velicina" Association="Self.FK_klijent_klijent_velicina">
+            <End Role="klijent_velicina" EntitySet="klijent_velicina" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_opstina" Association="Self.FK_klijent_opstina">
+            <End Role="opstina" EntitySet="opstina" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_opstina1" Association="Self.FK_klijent_opstina1">
+            <End Role="opstina" EntitySet="opstina" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_racun_klijent" Association="Self.FK_klijent_racun_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="klijent_racun" EntitySet="klijent_racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_revizorski_tim" Association="Self.FK_klijent_revizorski_tim">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_revizorski_tim1" Association="Self.FK_klijent_revizorski_tim1">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_revizorski_tim2" Association="Self.FK_klijent_revizorski_tim2">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_vlasnik_klijent" Association="Self.FK_klijent_vlasnik_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="klijent_vlasnik" EntitySet="klijent_vlasnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_zastupnik_klijent" Association="Self.FK_klijent_zastupnik_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="klijent_zastupnik" EntitySet="klijent_zastupnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_knjiga_dnevnik_knjiga" Association="Self.FK_knjiga_dnevnik_knjiga">
+            <End Role="knjiga" EntitySet="knjiga" />
+            <End Role="knjiga_dnevnik" EntitySet="knjiga_dnevnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_vl_korisnik_tip1" Association="Self.FK_korisnik_vl_korisnik_tip1">
+            <End Role="klijent_tip" EntitySet="klijent_tip" />
+            <End Role="klijent_vlasnik" EntitySet="klijent_vlasnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_vlasnik_drzava" Association="Self.FK_korisnik_vlasnik_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent_vlasnik" EntitySet="klijent_vlasnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_zastupnik_drzava" Association="Self.FK_korisnik_zastupnik_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent_zastupnik" EntitySet="klijent_zastupnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_zr_banka" Association="Self.FK_korisnik_zr_banka">
+            <End Role="banka" EntitySet="banka" />
+            <End Role="klijent_racun" EntitySet="klijent_racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_log_klijent" Association="Self.FK_log_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="log" EntitySet="log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_log_operater" Association="Self.FK_log_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="log" EntitySet="log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mailacc_operater" Association="Self.FK_mailacc_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="mailacc" EntitySet="mailacc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_operater_revizorski_tim" Association="Self.FK_operater_revizorski_tim">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="operater" EntitySet="operater" />
+          </AssociationSet>
+          <AssociationSet Name="FK_operater_revizorski_tim1" Association="Self.FK_operater_revizorski_tim1">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="operater" EntitySet="operater" />
+          </AssociationSet>
+          <AssociationSet Name="FK_podesavanja_operater" Association="Self.FK_podesavanja_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="podesavanja" EntitySet="podesavanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_revizorski_tim_tim_funkcija" Association="Self.FK_revizorski_tim_tim_funkcija">
+            <End Role="tim_funkcija" EntitySet="tim_funkcija" />
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_templates_templates_type" Association="Self.FK_templates_templates_type">
+            <End Role="templates_type" EntitySet="templates_type" />
+            <End Role="templates" EntitySet="templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_templates_type_revizija_scheme" Association="Self.FK_templates_type_revizija_scheme">
+            <End Role="revizija_scheme" EntitySet="revizija_scheme" />
+            <End Role="templates_type" EntitySet="templates_type" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="banka">
+          <Key>
+            <PropertyRef Name="id_banka" />
+          </Key>
+          <Property Name="id_banka" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="skraceni" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="prefiks" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="broj_racuna" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="plata_spisak" Type="Boolean" Nullable="false" />
+          <Property Name="swift" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="bankid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="adresa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="grad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_drzava" Type="Byte" />
+          <NavigationProperty Name="drzava" Relationship="Self.FK_banka_drzava" FromRole="banka" ToRole="drzava" />
+          <NavigationProperty Name="klijent_racun" Relationship="Self.FK_korisnik_zr_banka" FromRole="banka" ToRole="klijent_racun" />
+        </EntityType>
+        <EntityType Name="djelatnost">
+          <Key>
+            <PropertyRef Name="id_djelatnost" />
+          </Key>
+          <Property Name="id_djelatnost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sifra" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_djelatnost" FromRole="djelatnost" ToRole="klijent" />
+        </EntityType>
+        <EntityType Name="dms_file">
+          <Key>
+            <PropertyRef Name="id_dms_file" />
+          </Key>
+          <Property Name="id_dms_file" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <Property Name="id_tip" Type="Int32" Nullable="false" />
+          <Property Name="id_operater" Type="Int32" />
+          <Property Name="id_knjiga" Type="Int32" />
+          <Property Name="id_revizija_scheme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="guid_parent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="is_editable" Type="Boolean" />
+          <Property Name="id_status" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="dms_status" Relationship="Self.FK_dms_file_dms_status" FromRole="dms_file" ToRole="dms_status" />
+          <NavigationProperty Name="dms_type" Relationship="Self.FK_dms_file_dms_type" FromRole="dms_file" ToRole="dms_type" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_dms_file_klijent" FromRole="dms_file" ToRole="klijent" />
+          <NavigationProperty Name="knjiga" Relationship="Self.FK_dms_file_knjiga" FromRole="dms_file" ToRole="knjiga" />
+          <NavigationProperty Name="operater" Relationship="Self.FK_dms_file_operater" FromRole="dms_file" ToRole="operater" />
+          <NavigationProperty Name="revizija_scheme" Relationship="Self.FK_dms_file_revizija_scheme" FromRole="dms_file" ToRole="revizija_scheme" />
+          <NavigationProperty Name="dms_file1" Relationship="Self.dms_veza" FromRole="dms_file" ToRole="dms_file1" />
+          <NavigationProperty Name="dms_file2" Relationship="Self.dms_veza" FromRole="dms_file1" ToRole="dms_file" />
+        </EntityType>
+        <EntityType Name="dms_status">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="dms_file" Relationship="Self.FK_dms_file_dms_status" FromRole="dms_status" ToRole="dms_file" />
+        </EntityType>
+        <EntityType Name="dms_type">
+          <Key>
+            <PropertyRef Name="id_dms_type" />
+          </Key>
+          <Property Name="id_dms_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="dms_file" Relationship="Self.FK_dms_file_dms_type" FromRole="dms_type" ToRole="dms_file" />
+        </EntityType>
+        <EntityType Name="drzava">
+          <Key>
+            <PropertyRef Name="id_drzava" />
+          </Key>
+          <Property Name="id_drzava" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dnevnica" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="sifra" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="sifra_alfa" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="oznaka" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="banka" Relationship="Self.FK_banka_drzava" FromRole="drzava" ToRole="banka" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_drzava" FromRole="drzava" ToRole="klijent" />
+          <NavigationProperty Name="klijent1" Relationship="Self.FK_klijent_drzava1" FromRole="drzava" ToRole="klijent" />
+          <NavigationProperty Name="klijent_vlasnik" Relationship="Self.FK_korisnik_vlasnik_drzava" FromRole="drzava" ToRole="klijent_vlasnik" />
+          <NavigationProperty Name="klijent_zastupnik" Relationship="Self.FK_korisnik_zastupnik_drzava" FromRole="drzava" ToRole="klijent_zastupnik" />
+        </EntityType>
+        <EntityType Name="izvjestaj">
+          <Key>
+            <PropertyRef Name="id_izvjestaj" />
+          </Key>
+          <Property Name="id_izvjestaj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="report_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lang_naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="aktivan" Type="Boolean" />
+          <NavigationProperty Name="izvjestaj_arhiva_dokument" Relationship="Self.FK_izvjestaj_arhiva_dokument_izvjestaj" FromRole="izvjestaj" ToRole="izvjestaj_arhiva_dokument" />
+          <NavigationProperty Name="izvjestaj_dnevnik_def" Relationship="Self.FK_izvjestaj_dnevnik_izvjestaj" FromRole="izvjestaj" ToRole="izvjestaj_dnevnik_def" />
+          <NavigationProperty Name="izvjestaj_evidencija" Relationship="Self.FK_izvjestaj_evidencija_izvjestaj" FromRole="izvjestaj" ToRole="izvjestaj_evidencija" />
+          <NavigationProperty Name="izvjestaj_prethodni" Relationship="Self.FK_izvjestaj_prethodni_izvjestaj" FromRole="izvjestaj" ToRole="izvjestaj_prethodni" />
+        </EntityType>
+        <EntityType Name="izvjestaj_arhiva_dnevnik">
+          <Key>
+            <PropertyRef Name="id_dnevnik" />
+          </Key>
+          <Property Name="id_dnevnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_dnevnik_def" Type="Int32" Nullable="false" />
+          <Property Name="vrijednost" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="id_arhiva_dokument" Type="Int32" Nullable="false" />
+          <Property Name="vrijednost_prethodna" Type="Decimal" Precision="25" Scale="10" />
+          <NavigationProperty Name="izvjestaj_arhiva_dokument" Relationship="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def" FromRole="izvjestaj_arhiva_dnevnik" ToRole="izvjestaj_arhiva_dokument" />
+          <NavigationProperty Name="izvjestaj_dnevnik_def" Relationship="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1" FromRole="izvjestaj_arhiva_dnevnik" ToRole="izvjestaj_dnevnik_def" />
+        </EntityType>
+        <EntityType Name="izvjestaj_arhiva_dokument">
+          <Key>
+            <PropertyRef Name="id_arhiva_dokument" />
+          </Key>
+          <Property Name="id_arhiva_dokument" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_knjiga" Type="Int32" Nullable="false" />
+          <Property Name="id_iskaz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="godina" Type="Int32" />
+          <NavigationProperty Name="izvjestaj" Relationship="Self.FK_izvjestaj_arhiva_dokument_izvjestaj" FromRole="izvjestaj_arhiva_dokument" ToRole="izvjestaj" />
+          <NavigationProperty Name="izvjestaj_arhiva_dnevnik" Relationship="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def" FromRole="izvjestaj_arhiva_dokument" ToRole="izvjestaj_arhiva_dnevnik" />
+          <NavigationProperty Name="knjiga" Relationship="Self.FK_izvjestaj_arhiva_dokument_knjiga" FromRole="izvjestaj_arhiva_dokument" ToRole="knjiga" />
+        </EntityType>
+        <EntityType Name="izvjestaj_dnevnik_def">
+          <Key>
+            <PropertyRef Name="id_dnevnik_def" />
+          </Key>
+          <Property Name="id_dnevnik_def" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_dnevnik" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_izvjestaj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="info1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="info2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="computed" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="style_bold" Type="Boolean" Nullable="false" />
+          <Property Name="lang_naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lang_info1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="izvjestaj" Relationship="Self.FK_izvjestaj_dnevnik_izvjestaj" FromRole="izvjestaj_dnevnik_def" ToRole="izvjestaj" />
+          <NavigationProperty Name="izvjestaj_arhiva_dnevnik" Relationship="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1" FromRole="izvjestaj_dnevnik_def" ToRole="izvjestaj_arhiva_dnevnik" />
+        </EntityType>
+        <EntityType Name="izvjestaj_evidencija">
+          <Key>
+            <PropertyRef Name="id_dnevnik" />
+            <PropertyRef Name="id_izvjestaj" />
+            <PropertyRef Name="godina" />
+          </Key>
+          <Property Name="id_dnevnik" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_izvjestaj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="godina" Type="Int16" Nullable="false" />
+          <Property Name="iznos" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="pokrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="izvjestaj" Relationship="Self.FK_izvjestaj_evidencija_izvjestaj" FromRole="izvjestaj_evidencija" ToRole="izvjestaj" />
+        </EntityType>
+        <EntityType Name="izvjestaj_pozicija">
+          <Key>
+            <PropertyRef Name="id_pozicija" />
+          </Key>
+          <Property Name="id_pozicija" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="computed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="izvjestaj_prethodni">
+          <Key>
+            <PropertyRef Name="id_izvjestaj" />
+            <PropertyRef Name="godina" />
+            <PropertyRef Name="id_dnevnik" />
+          </Key>
+          <Property Name="id_izvjestaj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="godina" Type="Int32" Nullable="false" />
+          <Property Name="id_dnevnik" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vrijednost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="izvjestaj" Relationship="Self.FK_izvjestaj_prethodni_izvjestaj" FromRole="izvjestaj_prethodni" ToRole="izvjestaj" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_izvjestaj_prethodni_klijent" FromRole="izvjestaj_prethodni" ToRole="klijent" />
+        </EntityType>
+        <EntityType Name="klijent">
+          <Key>
+            <PropertyRef Name="id_klijent" />
+          </Key>
+          <Property Name="id_klijent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tip" Type="Int32" />
+          <Property Name="id_opstina" Type="Int16" />
+          <Property Name="id_djelatnost" Type="Int32" />
+          <Property Name="id_velicina" Type="Int32" />
+          <Property Name="id_drzava" Type="Byte" />
+          <Property Name="naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adresa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PIB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pdv" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="puni_naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="broj_rjesenja" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="datum_rjesenja" Type="DateTime" Precision="0" />
+          <Property Name="datum_gasenja" Type="DateTime" Precision="0" />
+          <Property Name="grad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mjesto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="posta_broj" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DMS_root" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_JMBG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_rodj" Type="DateTime" Precision="0" />
+          <Property Name="direktor_otac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_majka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_majkaDjev" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_brojlk" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="direktor_drzava_id" Type="Byte" />
+          <Property Name="direktor_opstina_id" Type="Int16" />
+          <Property Name="direktor_mjesto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direktor_ogranicenje" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="is_korisnik" Type="Boolean" />
+          <Property Name="kapital_novac" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="kapital_stvari" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="kapital_prava" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="id_revizor" Type="Int32" />
+          <Property Name="id_rukovodilac" Type="Int32" />
+          <Property Name="id_asistent" Type="Int32" />
+          <Property Name="erp_server" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="erp_sqluser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="erp_sqlpass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="erp_dbname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="djelatnost" Relationship="Self.FK_klijent_djelatnost" FromRole="klijent" ToRole="djelatnost" />
+          <NavigationProperty Name="dms_file" Relationship="Self.FK_dms_file_klijent" FromRole="klijent" ToRole="dms_file" />
+          <NavigationProperty Name="drzava" Relationship="Self.FK_klijent_drzava" FromRole="klijent" ToRole="drzava" />
+          <NavigationProperty Name="drzava1" Relationship="Self.FK_klijent_drzava1" FromRole="klijent" ToRole="drzava" />
+          <NavigationProperty Name="izvjestaj_prethodni" Relationship="Self.FK_izvjestaj_prethodni_klijent" FromRole="klijent" ToRole="izvjestaj_prethodni" />
+          <NavigationProperty Name="knjiga" Relationship="Self.FK_glavnaknjiga_klijent" FromRole="klijent" ToRole="knjiga" />
+          <NavigationProperty Name="klijent_tip" Relationship="Self.FK_klijent_klijent_tip" FromRole="klijent" ToRole="klijent_tip" />
+          <NavigationProperty Name="klijent_velicina" Relationship="Self.FK_klijent_klijent_velicina" FromRole="klijent" ToRole="klijent_velicina" />
+          <NavigationProperty Name="opstina" Relationship="Self.FK_klijent_opstina" FromRole="klijent" ToRole="opstina" />
+          <NavigationProperty Name="opstina1" Relationship="Self.FK_klijent_opstina1" FromRole="klijent" ToRole="opstina" />
+          <NavigationProperty Name="klijent_racun" Relationship="Self.FK_klijent_racun_klijent" FromRole="klijent" ToRole="klijent_racun" />
+          <NavigationProperty Name="revizorski_tim" Relationship="Self.FK_klijent_revizorski_tim" FromRole="klijent" ToRole="revizorski_tim" />
+          <NavigationProperty Name="revizorski_tim1" Relationship="Self.FK_klijent_revizorski_tim1" FromRole="klijent" ToRole="revizorski_tim" />
+          <NavigationProperty Name="revizorski_tim2" Relationship="Self.FK_klijent_revizorski_tim2" FromRole="klijent" ToRole="revizorski_tim" />
+          <NavigationProperty Name="klijent_vlasnik" Relationship="Self.FK_klijent_vlasnik_klijent" FromRole="klijent" ToRole="klijent_vlasnik" />
+          <NavigationProperty Name="klijent_zastupnik" Relationship="Self.FK_klijent_zastupnik_klijent" FromRole="klijent" ToRole="klijent_zastupnik" />
+          <NavigationProperty Name="log" Relationship="Self.FK_log_klijent" FromRole="klijent" ToRole="log" />
+        </EntityType>
+        <EntityType Name="klijent_racun">
+          <Key>
+            <PropertyRef Name="id_racun" />
+          </Key>
+          <Property Name="id_racun" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <Property Name="id_banka" Type="Byte" Nullable="false" />
+          <Property Name="broj" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="is_devizni" Type="Boolean" Nullable="false" />
+          <Property Name="order_id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="banka" Relationship="Self.FK_korisnik_zr_banka" FromRole="klijent_racun" ToRole="banka" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_racun_klijent" FromRole="klijent_racun" ToRole="klijent" />
+        </EntityType>
+        <EntityType Name="klijent_tip">
+          <Key>
+            <PropertyRef Name="id_tip" />
+          </Key>
+          <Property Name="id_tip" Type="Int32" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_klijent_tip" FromRole="klijent_tip" ToRole="klijent" />
+          <NavigationProperty Name="klijent_vlasnik" Relationship="Self.FK_korisnik_vl_korisnik_tip1" FromRole="klijent_tip" ToRole="klijent_vlasnik" />
+        </EntityType>
+        <EntityType Name="klijent_velicina">
+          <Key>
+            <PropertyRef Name="id_velicina" />
+          </Key>
+          <Property Name="id_velicina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_klijent_velicina" FromRole="klijent_velicina" ToRole="klijent" />
+        </EntityType>
+        <EntityType Name="klijent_vlasnik">
+          <Key>
+            <PropertyRef Name="id_vlasnik" />
+          </Key>
+          <Property Name="id_vlasnik" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <Property Name="id_tip" Type="Int32" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maticni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="is_foreign" Type="Boolean" Nullable="false" />
+          <Property Name="procenat" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="id_drzava" Type="Byte" />
+          <Property Name="opstina" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="mjesto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="adresa" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="br_dok" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="drzava" Relationship="Self.FK_korisnik_vlasnik_drzava" FromRole="klijent_vlasnik" ToRole="drzava" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_vlasnik_klijent" FromRole="klijent_vlasnik" ToRole="klijent" />
+          <NavigationProperty Name="klijent_tip" Relationship="Self.FK_korisnik_vl_korisnik_tip1" FromRole="klijent_vlasnik" ToRole="klijent_tip" />
+        </EntityType>
+        <EntityType Name="klijent_zastupnik">
+          <Key>
+            <PropertyRef Name="id_zastupnik" />
+          </Key>
+          <Property Name="id_zastupnik" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <Property Name="ime_prez" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maticni" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="br_dok" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_drzava" Type="Byte" />
+          <Property Name="opstina" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="mjesto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="adresa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="opis_ogran" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="drzava" Relationship="Self.FK_korisnik_zastupnik_drzava" FromRole="klijent_zastupnik" ToRole="drzava" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_zastupnik_klijent" FromRole="klijent_zastupnik" ToRole="klijent" />
+        </EntityType>
+        <EntityType Name="knjiga">
+          <Key>
+            <PropertyRef Name="id_knjiga" />
+          </Key>
+          <Property Name="id_knjiga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <Property Name="godina" Type="Int32" Nullable="false" />
+          <Property Name="datum_od" Type="DateTime" Precision="0" />
+          <Property Name="datum_do" Type="DateTime" Precision="0" />
+          <Property Name="opis" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="is_locked" Type="Boolean" />
+          <NavigationProperty Name="dms_file" Relationship="Self.FK_dms_file_knjiga" FromRole="knjiga" ToRole="dms_file" />
+          <NavigationProperty Name="izvjestaj_arhiva_dokument" Relationship="Self.FK_izvjestaj_arhiva_dokument_knjiga" FromRole="knjiga" ToRole="izvjestaj_arhiva_dokument" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_glavnaknjiga_klijent" FromRole="knjiga" ToRole="klijent" />
+          <NavigationProperty Name="knjiga_dnevnik" Relationship="Self.FK_knjiga_dnevnik_knjiga" FromRole="knjiga" ToRole="knjiga_dnevnik" />
+        </EntityType>
+        <EntityType Name="knjiga_dnevnik">
+          <Key>
+            <PropertyRef Name="id_knjiga_dnevnik" />
+          </Key>
+          <Property Name="id_knjiga_dnevnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_knjiga" Type="Int32" Nullable="false" />
+          <Property Name="broj_naloga" Type="Int32" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vrsta" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="konto_broj" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="konto_naziv" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="duguje" Type="Decimal" Precision="25" Scale="10" Nullable="false" />
+          <Property Name="potrazuje" Type="Decimal" Precision="25" Scale="10" Nullable="false" />
+          <Property Name="opis" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="sifra_partner" Type="Int32" />
+          <Property Name="naziv_partner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sifra_rj" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="naziv_rj" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="konto_grupa" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="konto_podgrupa" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="konto_klasa" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="knjiga" Relationship="Self.FK_knjiga_dnevnik_knjiga" FromRole="knjiga_dnevnik" ToRole="knjiga" />
+        </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="id_log" />
+          </Key>
+          <Property Name="id_log" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_operater" Type="Int32" />
+          <Property Name="id_klijent" Type="Int32" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tekst" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="modul" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_log_klijent" FromRole="log" ToRole="klijent" />
+          <NavigationProperty Name="operater" Relationship="Self.FK_log_operater" FromRole="log" ToRole="operater" />
+        </EntityType>
+        <EntityType Name="mailacc">
+          <Key>
+            <PropertyRef Name="id_mailacc" />
+          </Key>
+          <Property Name="id_mailacc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_operater" Type="Int32" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="enablessl" Type="Boolean" Nullable="false" />
+          <Property Name="port" Type="Int32" Nullable="false" />
+          <Property Name="host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="operater" Relationship="Self.FK_mailacc_operater" FromRole="mailacc" ToRole="operater" />
+        </EntityType>
+        <EntityType Name="operater">
+          <Key>
+            <PropertyRef Name="id_operater" />
+          </Key>
+          <Property Name="id_operater" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_revizorski_tim" Type="Int32" />
+          <Property Name="id_kontrolor" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ime" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="prezime" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="dms_file" Relationship="Self.FK_dms_file_operater" FromRole="operater" ToRole="dms_file" />
+          <NavigationProperty Name="log" Relationship="Self.FK_log_operater" FromRole="operater" ToRole="log" />
+          <NavigationProperty Name="mailacc" Relationship="Self.FK_mailacc_operater" FromRole="operater" ToRole="mailacc" />
+          <NavigationProperty Name="revizorski_tim" Relationship="Self.FK_operater_revizorski_tim" FromRole="operater" ToRole="revizorski_tim" />
+          <NavigationProperty Name="revizorski_tim1" Relationship="Self.FK_operater_revizorski_tim1" FromRole="operater" ToRole="revizorski_tim" />
+          <NavigationProperty Name="podesavanja" Relationship="Self.FK_podesavanja_operater" FromRole="operater" ToRole="podesavanja" />
+        </EntityType>
+        <EntityType Name="opstina">
+          <Key>
+            <PropertyRef Name="id_opstina" />
+          </Key>
+          <Property Name="id_opstina" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sifra" Type="Int32" Nullable="false" />
+          <Property Name="prirez_stopa" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="prirez_racun" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sifra_m4" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_opstina" FromRole="opstina" ToRole="klijent" />
+          <NavigationProperty Name="klijent1" Relationship="Self.FK_klijent_opstina1" FromRole="opstina" ToRole="klijent" />
+        </EntityType>
+        <EntityType Name="podesavanja">
+          <Key>
+            <PropertyRef Name="id_podesavanja" />
+          </Key>
+          <Property Name="id_podesavanja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_operater" Type="Int32" Nullable="false" />
+          <Property Name="use_ftp" Type="Boolean" />
+          <Property Name="dms_root" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dms_ftp_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dms_ftp_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dms_ftp_server" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="operater" Relationship="Self.FK_podesavanja_operater" FromRole="podesavanja" ToRole="operater" />
+        </EntityType>
+        <EntityType Name="revizija_scheme">
+          <Key>
+            <PropertyRef Name="id_revizija_scheme" />
+          </Key>
+          <Property Name="id_revizija_scheme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="parent" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="orderby" Type="Int32" />
+          <Property Name="is_folder" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="dms_file" Relationship="Self.FK_dms_file_revizija_scheme" FromRole="revizija_scheme" ToRole="dms_file" />
+          <NavigationProperty Name="templates_type" Relationship="Self.FK_templates_type_revizija_scheme" FromRole="revizija_scheme" ToRole="templates_type" />
+        </EntityType>
+        <EntityType Name="revizorski_tim">
+          <Key>
+            <PropertyRef Name="id_revizorski_tim" />
+          </Key>
+          <Property Name="id_revizorski_tim" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_funkcija" Type="Int32" Nullable="false" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="licenca_dms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="potpis" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="klijent" Relationship="Self.FK_klijent_revizorski_tim" FromRole="revizorski_tim" ToRole="klijent" />
+          <NavigationProperty Name="klijent1" Relationship="Self.FK_klijent_revizorski_tim1" FromRole="revizorski_tim" ToRole="klijent" />
+          <NavigationProperty Name="klijent2" Relationship="Self.FK_klijent_revizorski_tim2" FromRole="revizorski_tim" ToRole="klijent" />
+          <NavigationProperty Name="operater" Relationship="Self.FK_operater_revizorski_tim" FromRole="revizorski_tim" ToRole="operater" />
+          <NavigationProperty Name="operater1" Relationship="Self.FK_operater_revizorski_tim1" FromRole="revizorski_tim" ToRole="operater" />
+          <NavigationProperty Name="tim_funkcija" Relationship="Self.FK_revizorski_tim_tim_funkcija" FromRole="revizorski_tim" ToRole="tim_funkcija" />
+        </EntityType>
+        <EntityType Name="templates">
+          <Key>
+            <PropertyRef Name="id_template" />
+          </Key>
+          <Property Name="id_template" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_template_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="naziv" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="rtf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="templates_type" Relationship="Self.FK_templates_templates_type" FromRole="templates" ToRole="templates_type" />
+        </EntityType>
+        <EntityType Name="templates_type">
+          <Key>
+            <PropertyRef Name="id_templates_type" />
+          </Key>
+          <Property Name="id_templates_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_revizija_scheme" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="revizija_scheme" Relationship="Self.FK_templates_type_revizija_scheme" FromRole="templates_type" ToRole="revizija_scheme" />
+          <NavigationProperty Name="templates" Relationship="Self.FK_templates_templates_type" FromRole="templates_type" ToRole="templates" />
+        </EntityType>
+        <EntityType Name="tim_funkcija">
+          <Key>
+            <PropertyRef Name="id_funkcija" />
+          </Key>
+          <Property Name="id_funkcija" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="revizorski_tim" Relationship="Self.FK_revizorski_tim_tim_funkcija" FromRole="tim_funkcija" ToRole="revizorski_tim" />
+        </EntityType>
+        <EntityType Name="Bilans_stanja_view">
+          <Key>
+            <PropertyRef Name="naziv" />
+            <PropertyRef Name="Redni_broj" />
+            <PropertyRef Name="id_klijent" />
+            <PropertyRef Name="godina" />
+            <PropertyRef Name="Tip" />
+          </Key>
+          <Property Name="Grupa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Redni_broj" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vrijednost" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="Prethodna" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="id_klijent" Type="Int32" Nullable="false" />
+          <Property Name="godina" Type="Int32" Nullable="false" />
+          <Property Name="Tip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klijent___djelatnost___sifra___opstina___drzava">
+          <Key>
+            <PropertyRef Name="ID_klijent" />
+            <PropertyRef Name="Naziv" />
+          </Key>
+          <Property Name="ID_klijent" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sifra" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Djelatnost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Opstina" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Drzava" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_banka_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="banka" Type="Self.banka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="banka">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_zr_banka">
+          <End Role="banka" Type="Self.banka" Multiplicity="1" />
+          <End Role="klijent_racun" Type="Self.klijent_racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="banka">
+              <PropertyRef Name="id_banka" />
+            </Principal>
+            <Dependent Role="klijent_racun">
+              <PropertyRef Name="id_banka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_djelatnost">
+          <End Role="djelatnost" Type="Self.djelatnost" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="djelatnost">
+              <PropertyRef Name="id_djelatnost" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_djelatnost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_dms_status">
+          <End Role="dms_status" Type="Self.dms_status" Multiplicity="0..1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dms_status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_dms_type">
+          <End Role="dms_type" Type="Self.dms_type" Multiplicity="1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dms_type">
+              <PropertyRef Name="id_dms_type" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_tip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_knjiga">
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="knjiga">
+              <PropertyRef Name="id_knjiga" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_knjiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="0..1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dms_file_revizija_scheme">
+          <End Role="revizija_scheme" Type="Self.revizija_scheme" Multiplicity="0..1" />
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizija_scheme">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Principal>
+            <Dependent Role="dms_file">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_drzava1">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="direktor_drzava_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_vlasnik_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent_vlasnik" Type="Self.klijent_vlasnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent_vlasnik">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_zastupnik_drzava">
+          <End Role="drzava" Type="Self.drzava" Multiplicity="0..1" />
+          <End Role="klijent_zastupnik" Type="Self.klijent_zastupnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="drzava">
+              <PropertyRef Name="id_drzava" />
+            </Principal>
+            <Dependent Role="klijent_zastupnik">
+              <PropertyRef Name="id_drzava" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dokument_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1" />
+          <End Role="izvjestaj_arhiva_dokument" Type="Self.izvjestaj_arhiva_dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dokument">
+              <PropertyRef Name="id_iskaz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_dnevnik_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="izvjestaj_dnevnik_def" Type="Self.izvjestaj_dnevnik_def" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_dnevnik_def">
+              <PropertyRef Name="id_izvjestaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_evidencija_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1" />
+          <End Role="izvjestaj_evidencija" Type="Self.izvjestaj_evidencija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_evidencija">
+              <PropertyRef Name="id_izvjestaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_prethodni_izvjestaj">
+          <End Role="izvjestaj" Type="Self.izvjestaj" Multiplicity="1" />
+          <End Role="izvjestaj_prethodni" Type="Self.izvjestaj_prethodni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj">
+              <PropertyRef Name="id_izvjestaj" />
+            </Principal>
+            <Dependent Role="izvjestaj_prethodni">
+              <PropertyRef Name="id_izvjestaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def">
+          <End Role="izvjestaj_arhiva_dokument" Type="Self.izvjestaj_arhiva_dokument" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="izvjestaj_arhiva_dnevnik" Type="Self.izvjestaj_arhiva_dnevnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj_arhiva_dokument">
+              <PropertyRef Name="id_arhiva_dokument" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dnevnik">
+              <PropertyRef Name="id_arhiva_dokument" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1">
+          <End Role="izvjestaj_dnevnik_def" Type="Self.izvjestaj_dnevnik_def" Multiplicity="1" />
+          <End Role="izvjestaj_arhiva_dnevnik" Type="Self.izvjestaj_arhiva_dnevnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="izvjestaj_dnevnik_def">
+              <PropertyRef Name="id_dnevnik_def" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dnevnik">
+              <PropertyRef Name="id_dnevnik_def" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_arhiva_dokument_knjiga">
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="izvjestaj_arhiva_dokument" Type="Self.izvjestaj_arhiva_dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="knjiga">
+              <PropertyRef Name="id_knjiga" />
+            </Principal>
+            <Dependent Role="izvjestaj_arhiva_dokument">
+              <PropertyRef Name="id_knjiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izvjestaj_prethodni_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="izvjestaj_prethodni" Type="Self.izvjestaj_prethodni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="izvjestaj_prethodni">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_glavnaknjiga_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="knjiga">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_klijent_tip">
+          <End Role="klijent_tip" Type="Self.klijent_tip" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent_tip">
+              <PropertyRef Name="id_tip" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_tip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_klijent_velicina">
+          <End Role="klijent_velicina" Type="Self.klijent_velicina" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent_velicina">
+              <PropertyRef Name="id_velicina" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_velicina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_opstina">
+          <End Role="opstina" Type="Self.opstina" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="opstina">
+              <PropertyRef Name="id_opstina" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_opstina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_opstina1">
+          <End Role="opstina" Type="Self.opstina" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="opstina">
+              <PropertyRef Name="id_opstina" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="direktor_opstina_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_racun_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="klijent_racun" Type="Self.klijent_racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="klijent_racun">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_revizorski_tim">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_revizor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_revizorski_tim1">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_rukovodilac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_revizorski_tim2">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="klijent" Type="Self.klijent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="klijent">
+              <PropertyRef Name="id_asistent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_vlasnik_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="klijent_vlasnik" Type="Self.klijent_vlasnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="klijent_vlasnik">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klijent_zastupnik_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="1" />
+          <End Role="klijent_zastupnik" Type="Self.klijent_zastupnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="klijent_zastupnik">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_log_klijent">
+          <End Role="klijent" Type="Self.klijent" Multiplicity="0..1" />
+          <End Role="log" Type="Self.log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent">
+              <PropertyRef Name="id_klijent" />
+            </Principal>
+            <Dependent Role="log">
+              <PropertyRef Name="id_klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_korisnik_vl_korisnik_tip1">
+          <End Role="klijent_tip" Type="Self.klijent_tip" Multiplicity="1" />
+          <End Role="klijent_vlasnik" Type="Self.klijent_vlasnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klijent_tip">
+              <PropertyRef Name="id_tip" />
+            </Principal>
+            <Dependent Role="klijent_vlasnik">
+              <PropertyRef Name="id_tip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_knjiga_dnevnik_knjiga">
+          <End Role="knjiga" Type="Self.knjiga" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="knjiga_dnevnik" Type="Self.knjiga_dnevnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="knjiga">
+              <PropertyRef Name="id_knjiga" />
+            </Principal>
+            <Dependent Role="knjiga_dnevnik">
+              <PropertyRef Name="id_knjiga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_log_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="0..1" />
+          <End Role="log" Type="Self.log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="log">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mailacc_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="1" />
+          <End Role="mailacc" Type="Self.mailacc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="mailacc">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_operater_revizorski_tim">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="operater" Type="Self.operater" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="operater">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_operater_revizorski_tim1">
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="0..1" />
+          <End Role="operater" Type="Self.operater" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizorski_tim">
+              <PropertyRef Name="id_revizorski_tim" />
+            </Principal>
+            <Dependent Role="operater">
+              <PropertyRef Name="id_kontrolor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_podesavanja_operater">
+          <End Role="operater" Type="Self.operater" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="podesavanja" Type="Self.podesavanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operater">
+              <PropertyRef Name="id_operater" />
+            </Principal>
+            <Dependent Role="podesavanja">
+              <PropertyRef Name="id_operater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_templates_type_revizija_scheme">
+          <End Role="revizija_scheme" Type="Self.revizija_scheme" Multiplicity="0..1" />
+          <End Role="templates_type" Type="Self.templates_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="revizija_scheme">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Principal>
+            <Dependent Role="templates_type">
+              <PropertyRef Name="id_revizija_scheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_revizorski_tim_tim_funkcija">
+          <End Role="tim_funkcija" Type="Self.tim_funkcija" Multiplicity="1" />
+          <End Role="revizorski_tim" Type="Self.revizorski_tim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tim_funkcija">
+              <PropertyRef Name="id_funkcija" />
+            </Principal>
+            <Dependent Role="revizorski_tim">
+              <PropertyRef Name="id_funkcija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_templates_templates_type">
+          <End Role="templates_type" Type="Self.templates_type" Multiplicity="0..1" />
+          <End Role="templates" Type="Self.templates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="templates_type">
+              <PropertyRef Name="id_templates_type" />
+            </Principal>
+            <Dependent Role="templates">
+              <PropertyRef Name="id_template_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dms_veza">
+          <End Role="dms_file" Type="Self.dms_file" Multiplicity="*" />
+          <End Role="dms_file1" Type="Self.dms_file" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="banka" EntityType="Self.banka" />
+          <EntitySet Name="djelatnost" EntityType="Self.djelatnost" />
+          <EntitySet Name="dms_file" EntityType="Self.dms_file" />
+          <EntitySet Name="dms_status" EntityType="Self.dms_status" />
+          <EntitySet Name="dms_type" EntityType="Self.dms_type" />
+          <EntitySet Name="drzava" EntityType="Self.drzava" />
+          <EntitySet Name="izvjestaj" EntityType="Self.izvjestaj" />
+          <EntitySet Name="izvjestaj_arhiva_dnevnik" EntityType="Self.izvjestaj_arhiva_dnevnik" />
+          <EntitySet Name="izvjestaj_arhiva_dokument" EntityType="Self.izvjestaj_arhiva_dokument" />
+          <EntitySet Name="izvjestaj_dnevnik_def" EntityType="Self.izvjestaj_dnevnik_def" />
+          <EntitySet Name="izvjestaj_evidencija" EntityType="Self.izvjestaj_evidencija" />
+          <EntitySet Name="izvjestaj_pozicija" EntityType="Self.izvjestaj_pozicija" />
+          <EntitySet Name="izvjestaj_prethodni" EntityType="Self.izvjestaj_prethodni" />
+          <EntitySet Name="klijent" EntityType="Self.klijent" />
+          <EntitySet Name="klijent_racun" EntityType="Self.klijent_racun" />
+          <EntitySet Name="klijent_tip" EntityType="Self.klijent_tip" />
+          <EntitySet Name="klijent_velicina" EntityType="Self.klijent_velicina" />
+          <EntitySet Name="klijent_vlasnik" EntityType="Self.klijent_vlasnik" />
+          <EntitySet Name="klijent_zastupnik" EntityType="Self.klijent_zastupnik" />
+          <EntitySet Name="knjiga" EntityType="Self.knjiga" />
+          <EntitySet Name="knjiga_dnevnik" EntityType="Self.knjiga_dnevnik" />
+          <EntitySet Name="log" EntityType="Self.log" />
+          <EntitySet Name="mailacc" EntityType="Self.mailacc" />
+          <EntitySet Name="operater" EntityType="Self.operater" />
+          <EntitySet Name="opstina" EntityType="Self.opstina" />
+          <EntitySet Name="podesavanja" EntityType="Self.podesavanja" />
+          <EntitySet Name="revizija_scheme" EntityType="Self.revizija_scheme" />
+          <EntitySet Name="revizorski_tim" EntityType="Self.revizorski_tim" />
+          <EntitySet Name="templates" EntityType="Self.templates" />
+          <EntitySet Name="templates_type" EntityType="Self.templates_type" />
+          <EntitySet Name="tim_funkcija" EntityType="Self.tim_funkcija" />
+          <EntitySet Name="Bilans_stanja_view" EntityType="Self.Bilans_stanja_view" />
+          <EntitySet Name="klijent___djelatnost___sifra___opstina___drzava" EntityType="Self.klijent___djelatnost___sifra___opstina___drzava" />
+          <AssociationSet Name="FK_banka_drzava" Association="Self.FK_banka_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="banka" EntitySet="banka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_zr_banka" Association="Self.FK_korisnik_zr_banka">
+            <End Role="banka" EntitySet="banka" />
+            <End Role="klijent_racun" EntitySet="klijent_racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_djelatnost" Association="Self.FK_klijent_djelatnost">
+            <End Role="djelatnost" EntitySet="djelatnost" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_dms_status" Association="Self.FK_dms_file_dms_status">
+            <End Role="dms_status" EntitySet="dms_status" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_dms_type" Association="Self.FK_dms_file_dms_type">
+            <End Role="dms_type" EntitySet="dms_type" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_klijent" Association="Self.FK_dms_file_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_knjiga" Association="Self.FK_dms_file_knjiga">
+            <End Role="knjiga" EntitySet="knjiga" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_operater" Association="Self.FK_dms_file_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dms_file_revizija_scheme" Association="Self.FK_dms_file_revizija_scheme">
+            <End Role="revizija_scheme" EntitySet="revizija_scheme" />
+            <End Role="dms_file" EntitySet="dms_file" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_drzava" Association="Self.FK_klijent_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_drzava1" Association="Self.FK_klijent_drzava1">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_vlasnik_drzava" Association="Self.FK_korisnik_vlasnik_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent_vlasnik" EntitySet="klijent_vlasnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_zastupnik_drzava" Association="Self.FK_korisnik_zastupnik_drzava">
+            <End Role="drzava" EntitySet="drzava" />
+            <End Role="klijent_zastupnik" EntitySet="klijent_zastupnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dokument_izvjestaj" Association="Self.FK_izvjestaj_arhiva_dokument_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_arhiva_dokument" EntitySet="izvjestaj_arhiva_dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_dnevnik_izvjestaj" Association="Self.FK_izvjestaj_dnevnik_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_dnevnik_def" EntitySet="izvjestaj_dnevnik_def" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_evidencija_izvjestaj" Association="Self.FK_izvjestaj_evidencija_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_evidencija" EntitySet="izvjestaj_evidencija" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_prethodni_izvjestaj" Association="Self.FK_izvjestaj_prethodni_izvjestaj">
+            <End Role="izvjestaj" EntitySet="izvjestaj" />
+            <End Role="izvjestaj_prethodni" EntitySet="izvjestaj_prethodni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def" Association="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def">
+            <End Role="izvjestaj_arhiva_dokument" EntitySet="izvjestaj_arhiva_dokument" />
+            <End Role="izvjestaj_arhiva_dnevnik" EntitySet="izvjestaj_arhiva_dnevnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1" Association="Self.FK_izvjestaj_arhiva_dnevnik_izvjestaj_dnevnik_def1">
+            <End Role="izvjestaj_dnevnik_def" EntitySet="izvjestaj_dnevnik_def" />
+            <End Role="izvjestaj_arhiva_dnevnik" EntitySet="izvjestaj_arhiva_dnevnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_arhiva_dokument_knjiga" Association="Self.FK_izvjestaj_arhiva_dokument_knjiga">
+            <End Role="knjiga" EntitySet="knjiga" />
+            <End Role="izvjestaj_arhiva_dokument" EntitySet="izvjestaj_arhiva_dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izvjestaj_prethodni_klijent" Association="Self.FK_izvjestaj_prethodni_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="izvjestaj_prethodni" EntitySet="izvjestaj_prethodni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_glavnaknjiga_klijent" Association="Self.FK_glavnaknjiga_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="knjiga" EntitySet="knjiga" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_klijent_tip" Association="Self.FK_klijent_klijent_tip">
+            <End Role="klijent_tip" EntitySet="klijent_tip" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_klijent_velicina" Association="Self.FK_klijent_klijent_velicina">
+            <End Role="klijent_velicina" EntitySet="klijent_velicina" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_opstina" Association="Self.FK_klijent_opstina">
+            <End Role="opstina" EntitySet="opstina" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_opstina1" Association="Self.FK_klijent_opstina1">
+            <End Role="opstina" EntitySet="opstina" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_racun_klijent" Association="Self.FK_klijent_racun_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="klijent_racun" EntitySet="klijent_racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_revizorski_tim" Association="Self.FK_klijent_revizorski_tim">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_revizorski_tim1" Association="Self.FK_klijent_revizorski_tim1">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_revizorski_tim2" Association="Self.FK_klijent_revizorski_tim2">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="klijent" EntitySet="klijent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_vlasnik_klijent" Association="Self.FK_klijent_vlasnik_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="klijent_vlasnik" EntitySet="klijent_vlasnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klijent_zastupnik_klijent" Association="Self.FK_klijent_zastupnik_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="klijent_zastupnik" EntitySet="klijent_zastupnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_log_klijent" Association="Self.FK_log_klijent">
+            <End Role="klijent" EntitySet="klijent" />
+            <End Role="log" EntitySet="log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_korisnik_vl_korisnik_tip1" Association="Self.FK_korisnik_vl_korisnik_tip1">
+            <End Role="klijent_tip" EntitySet="klijent_tip" />
+            <End Role="klijent_vlasnik" EntitySet="klijent_vlasnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_knjiga_dnevnik_knjiga" Association="Self.FK_knjiga_dnevnik_knjiga">
+            <End Role="knjiga" EntitySet="knjiga" />
+            <End Role="knjiga_dnevnik" EntitySet="knjiga_dnevnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_log_operater" Association="Self.FK_log_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="log" EntitySet="log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mailacc_operater" Association="Self.FK_mailacc_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="mailacc" EntitySet="mailacc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_operater_revizorski_tim" Association="Self.FK_operater_revizorski_tim">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="operater" EntitySet="operater" />
+          </AssociationSet>
+          <AssociationSet Name="FK_operater_revizorski_tim1" Association="Self.FK_operater_revizorski_tim1">
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+            <End Role="operater" EntitySet="operater" />
+          </AssociationSet>
+          <AssociationSet Name="FK_podesavanja_operater" Association="Self.FK_podesavanja_operater">
+            <End Role="operater" EntitySet="operater" />
+            <End Role="podesavanja" EntitySet="podesavanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_templates_type_revizija_scheme" Association="Self.FK_templates_type_revizija_scheme">
+            <End Role="revizija_scheme" EntitySet="revizija_scheme" />
+            <End Role="templates_type" EntitySet="templates_type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_revizorski_tim_tim_funkcija" Association="Self.FK_revizorski_tim_tim_funkcija">
+            <End Role="tim_funkcija" EntitySet="tim_funkcija" />
+            <End Role="revizorski_tim" EntitySet="revizorski_tim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_templates_templates_type" Association="Self.FK_templates_templates_type">
+            <End Role="templates_type" EntitySet="templates_type" />
+            <End Role="templates" EntitySet="templates" />
+          </AssociationSet>
+          <AssociationSet Name="dms_veza" Association="Self.dms_veza">
+            <End Role="dms_file" EntitySet="dms_file" />
+            <End Role="dms_file1" EntitySet="dms_file" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Database">
+          <EntitySetMapping Name="banka">
+            <EntityTypeMapping TypeName="Model.banka">
+              <MappingFragment StoreEntitySet="banka">
+                <ScalarProperty Name="id_banka" ColumnName="id_banka" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="skraceni" ColumnName="skraceni" />
+                <ScalarProperty Name="prefiks" ColumnName="prefiks" />
+                <ScalarProperty Name="broj_racuna" ColumnName="broj_racuna" />
+                <ScalarProperty Name="plata_spisak" ColumnName="plata_spisak" />
+                <ScalarProperty Name="swift" ColumnName="swift" />
+                <ScalarProperty Name="bankid" ColumnName="bankid" />
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="grad" ColumnName="grad" />
+                <ScalarProperty Name="id_drzava" ColumnName="id_drzava" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="djelatnost">
+            <EntityTypeMapping TypeName="Model.djelatnost">
+              <MappingFragment StoreEntitySet="djelatnost">
+                <ScalarProperty Name="id_djelatnost" ColumnName="id_djelatnost" />
+                <ScalarProperty Name="sifra" ColumnName="sifra" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dms_file">
+            <EntityTypeMapping TypeName="Model.dms_file">
+              <MappingFragment StoreEntitySet="dms_file">
+                <ScalarProperty Name="id_dms_file" ColumnName="id_dms_file" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+                <ScalarProperty Name="id_operater" ColumnName="id_operater" />
+                <ScalarProperty Name="id_knjiga" ColumnName="id_knjiga" />
+                <ScalarProperty Name="id_revizija_scheme" ColumnName="id_revizija_scheme" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="guid_parent" ColumnName="guid_parent" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="is_editable" ColumnName="is_editable" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dms_status">
+            <EntityTypeMapping TypeName="Model.dms_status">
+              <MappingFragment StoreEntitySet="dms_status">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dms_type">
+            <EntityTypeMapping TypeName="Model.dms_type">
+              <MappingFragment StoreEntitySet="dms_type">
+                <ScalarProperty Name="id_dms_type" ColumnName="id_dms_type" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drzava">
+            <EntityTypeMapping TypeName="Model.drzava">
+              <MappingFragment StoreEntitySet="drzava">
+                <ScalarProperty Name="id_drzava" ColumnName="id_drzava" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="dnevnica" ColumnName="dnevnica" />
+                <ScalarProperty Name="sifra" ColumnName="sifra" />
+                <ScalarProperty Name="sifra_alfa" ColumnName="sifra_alfa" />
+                <ScalarProperty Name="oznaka" ColumnName="oznaka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj">
+            <EntityTypeMapping TypeName="Model.izvjestaj">
+              <MappingFragment StoreEntitySet="izvjestaj">
+                <ScalarProperty Name="id_izvjestaj" ColumnName="id_izvjestaj" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="report_name" ColumnName="report_name" />
+                <ScalarProperty Name="lang_naziv" ColumnName="lang_naziv" />
+                <ScalarProperty Name="aktivan" ColumnName="aktivan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj_arhiva_dnevnik">
+            <EntityTypeMapping TypeName="Model.izvjestaj_arhiva_dnevnik">
+              <MappingFragment StoreEntitySet="izvjestaj_arhiva_dnevnik">
+                <ScalarProperty Name="id_dnevnik" ColumnName="id_dnevnik" />
+                <ScalarProperty Name="id_dnevnik_def" ColumnName="id_dnevnik_def" />
+                <ScalarProperty Name="vrijednost" ColumnName="vrijednost" />
+                <ScalarProperty Name="id_arhiva_dokument" ColumnName="id_arhiva_dokument" />
+                <ScalarProperty Name="vrijednost_prethodna" ColumnName="vrijednost_prethodna" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj_arhiva_dokument">
+            <EntityTypeMapping TypeName="Model.izvjestaj_arhiva_dokument">
+              <MappingFragment StoreEntitySet="izvjestaj_arhiva_dokument">
+                <ScalarProperty Name="id_arhiva_dokument" ColumnName="id_arhiva_dokument" />
+                <ScalarProperty Name="id_knjiga" ColumnName="id_knjiga" />
+                <ScalarProperty Name="id_iskaz" ColumnName="id_iskaz" />
+                <ScalarProperty Name="godina" ColumnName="godina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj_dnevnik_def">
+            <EntityTypeMapping TypeName="Model.izvjestaj_dnevnik_def">
+              <MappingFragment StoreEntitySet="izvjestaj_dnevnik_def">
+                <ScalarProperty Name="id_dnevnik_def" ColumnName="id_dnevnik_def" />
+                <ScalarProperty Name="id_dnevnik" ColumnName="id_dnevnik" />
+                <ScalarProperty Name="id_izvjestaj" ColumnName="id_izvjestaj" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="info1" ColumnName="info1" />
+                <ScalarProperty Name="info2" ColumnName="info2" />
+                <ScalarProperty Name="computed" ColumnName="computed" />
+                <ScalarProperty Name="style_bold" ColumnName="style_bold" />
+                <ScalarProperty Name="lang_naziv" ColumnName="lang_naziv" />
+                <ScalarProperty Name="lang_info1" ColumnName="lang_info1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj_evidencija">
+            <EntityTypeMapping TypeName="Model.izvjestaj_evidencija">
+              <MappingFragment StoreEntitySet="izvjestaj_evidencija">
+                <ScalarProperty Name="id_dnevnik" ColumnName="id_dnevnik" />
+                <ScalarProperty Name="id_izvjestaj" ColumnName="id_izvjestaj" />
+                <ScalarProperty Name="godina" ColumnName="godina" />
+                <ScalarProperty Name="iznos" ColumnName="iznos" />
+                <ScalarProperty Name="pokrice" ColumnName="pokrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj_pozicija">
+            <EntityTypeMapping TypeName="Model.izvjestaj_pozicija">
+              <MappingFragment StoreEntitySet="izvjestaj_pozicija">
+                <ScalarProperty Name="id_pozicija" ColumnName="id_pozicija" />
+                <ScalarProperty Name="computed" ColumnName="computed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izvjestaj_prethodni">
+            <EntityTypeMapping TypeName="Model.izvjestaj_prethodni">
+              <MappingFragment StoreEntitySet="izvjestaj_prethodni">
+                <ScalarProperty Name="id_izvjestaj" ColumnName="id_izvjestaj" />
+                <ScalarProperty Name="godina" ColumnName="godina" />
+                <ScalarProperty Name="id_dnevnik" ColumnName="id_dnevnik" />
+                <ScalarProperty Name="vrijednost" ColumnName="vrijednost" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent">
+            <EntityTypeMapping TypeName="Model.klijent">
+              <MappingFragment StoreEntitySet="klijent">
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+                <ScalarProperty Name="id_opstina" ColumnName="id_opstina" />
+                <ScalarProperty Name="id_djelatnost" ColumnName="id_djelatnost" />
+                <ScalarProperty Name="id_velicina" ColumnName="id_velicina" />
+                <ScalarProperty Name="id_drzava" ColumnName="id_drzava" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="PIB" ColumnName="PIB" />
+                <ScalarProperty Name="pdv" ColumnName="pdv" />
+                <ScalarProperty Name="puni_naziv" ColumnName="puni_naziv" />
+                <ScalarProperty Name="broj_rjesenja" ColumnName="broj_rjesenja" />
+                <ScalarProperty Name="datum_rjesenja" ColumnName="datum_rjesenja" />
+                <ScalarProperty Name="datum_gasenja" ColumnName="datum_gasenja" />
+                <ScalarProperty Name="grad" ColumnName="grad" />
+                <ScalarProperty Name="mjesto" ColumnName="mjesto" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="posta_broj" ColumnName="posta_broj" />
+                <ScalarProperty Name="DMS_root" ColumnName="DMS_root" />
+                <ScalarProperty Name="direktor_ime" ColumnName="direktor_ime" />
+                <ScalarProperty Name="direktor_JMBG" ColumnName="direktor_JMBG" />
+                <ScalarProperty Name="direktor_rodj" ColumnName="direktor_rodj" />
+                <ScalarProperty Name="direktor_otac" ColumnName="direktor_otac" />
+                <ScalarProperty Name="direktor_majka" ColumnName="direktor_majka" />
+                <ScalarProperty Name="direktor_majkaDjev" ColumnName="direktor_majkaDjev" />
+                <ScalarProperty Name="direktor_brojlk" ColumnName="direktor_brojlk" />
+                <ScalarProperty Name="direktor_drzava_id" ColumnName="direktor_drzava_id" />
+                <ScalarProperty Name="direktor_opstina_id" ColumnName="direktor_opstina_id" />
+                <ScalarProperty Name="direktor_mjesto" ColumnName="direktor_mjesto" />
+                <ScalarProperty Name="direktor_adresa" ColumnName="direktor_adresa" />
+                <ScalarProperty Name="direktor_ogranicenje" ColumnName="direktor_ogranicenje" />
+                <ScalarProperty Name="is_korisnik" ColumnName="is_korisnik" />
+                <ScalarProperty Name="kapital_novac" ColumnName="kapital_novac" />
+                <ScalarProperty Name="kapital_stvari" ColumnName="kapital_stvari" />
+                <ScalarProperty Name="kapital_prava" ColumnName="kapital_prava" />
+                <ScalarProperty Name="id_revizor" ColumnName="id_revizor" />
+                <ScalarProperty Name="id_rukovodilac" ColumnName="id_rukovodilac" />
+                <ScalarProperty Name="id_asistent" ColumnName="id_asistent" />
+                <ScalarProperty Name="erp_server" ColumnName="erp_server" />
+                <ScalarProperty Name="erp_sqluser" ColumnName="erp_sqluser" />
+                <ScalarProperty Name="erp_sqlpass" ColumnName="erp_sqlpass" />
+                <ScalarProperty Name="erp_dbname" ColumnName="erp_dbname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent_racun">
+            <EntityTypeMapping TypeName="Model.klijent_racun">
+              <MappingFragment StoreEntitySet="klijent_racun">
+                <ScalarProperty Name="id_racun" ColumnName="id_racun" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="id_banka" ColumnName="id_banka" />
+                <ScalarProperty Name="broj" ColumnName="broj" />
+                <ScalarProperty Name="is_devizni" ColumnName="is_devizni" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent_tip">
+            <EntityTypeMapping TypeName="Model.klijent_tip">
+              <MappingFragment StoreEntitySet="klijent_tip">
+                <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent_velicina">
+            <EntityTypeMapping TypeName="Model.klijent_velicina">
+              <MappingFragment StoreEntitySet="klijent_velicina">
+                <ScalarProperty Name="id_velicina" ColumnName="id_velicina" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent_vlasnik">
+            <EntityTypeMapping TypeName="Model.klijent_vlasnik">
+              <MappingFragment StoreEntitySet="klijent_vlasnik">
+                <ScalarProperty Name="id_vlasnik" ColumnName="id_vlasnik" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="maticni" ColumnName="maticni" />
+                <ScalarProperty Name="is_foreign" ColumnName="is_foreign" />
+                <ScalarProperty Name="procenat" ColumnName="procenat" />
+                <ScalarProperty Name="id_drzava" ColumnName="id_drzava" />
+                <ScalarProperty Name="opstina" ColumnName="opstina" />
+                <ScalarProperty Name="mjesto" ColumnName="mjesto" />
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="br_dok" ColumnName="br_dok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent_zastupnik">
+            <EntityTypeMapping TypeName="Model.klijent_zastupnik">
+              <MappingFragment StoreEntitySet="klijent_zastupnik">
+                <ScalarProperty Name="id_zastupnik" ColumnName="id_zastupnik" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="ime_prez" ColumnName="ime_prez" />
+                <ScalarProperty Name="maticni" ColumnName="maticni" />
+                <ScalarProperty Name="br_dok" ColumnName="br_dok" />
+                <ScalarProperty Name="id_drzava" ColumnName="id_drzava" />
+                <ScalarProperty Name="opstina" ColumnName="opstina" />
+                <ScalarProperty Name="mjesto" ColumnName="mjesto" />
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="opis_ogran" ColumnName="opis_ogran" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="knjiga">
+            <EntityTypeMapping TypeName="Model.knjiga">
+              <MappingFragment StoreEntitySet="knjiga">
+                <ScalarProperty Name="id_knjiga" ColumnName="id_knjiga" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="godina" ColumnName="godina" />
+                <ScalarProperty Name="datum_od" ColumnName="datum_od" />
+                <ScalarProperty Name="datum_do" ColumnName="datum_do" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="is_locked" ColumnName="is_locked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="knjiga_dnevnik">
+            <EntityTypeMapping TypeName="Model.knjiga_dnevnik">
+              <MappingFragment StoreEntitySet="knjiga_dnevnik">
+                <ScalarProperty Name="id_knjiga_dnevnik" ColumnName="id_knjiga_dnevnik" />
+                <ScalarProperty Name="id_knjiga" ColumnName="id_knjiga" />
+                <ScalarProperty Name="broj_naloga" ColumnName="broj_naloga" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="vrsta" ColumnName="vrsta" />
+                <ScalarProperty Name="konto_broj" ColumnName="konto_broj" />
+                <ScalarProperty Name="konto_naziv" ColumnName="konto_naziv" />
+                <ScalarProperty Name="duguje" ColumnName="duguje" />
+                <ScalarProperty Name="potrazuje" ColumnName="potrazuje" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="sifra_partner" ColumnName="sifra_partner" />
+                <ScalarProperty Name="naziv_partner" ColumnName="naziv_partner" />
+                <ScalarProperty Name="sifra_rj" ColumnName="sifra_rj" />
+                <ScalarProperty Name="naziv_rj" ColumnName="naziv_rj" />
+                <ScalarProperty Name="konto_grupa" ColumnName="konto_grupa" />
+                <ScalarProperty Name="konto_podgrupa" ColumnName="konto_podgrupa" />
+                <ScalarProperty Name="konto_klasa" ColumnName="konto_klasa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="log">
+            <EntityTypeMapping TypeName="Model.log">
+              <MappingFragment StoreEntitySet="log">
+                <ScalarProperty Name="id_log" ColumnName="id_log" />
+                <ScalarProperty Name="id_operater" ColumnName="id_operater" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="tekst" ColumnName="tekst" />
+                <ScalarProperty Name="modul" ColumnName="modul" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mailacc">
+            <EntityTypeMapping TypeName="Model.mailacc">
+              <MappingFragment StoreEntitySet="mailacc">
+                <ScalarProperty Name="id_mailacc" ColumnName="id_mailacc" />
+                <ScalarProperty Name="id_operater" ColumnName="id_operater" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="enablessl" ColumnName="enablessl" />
+                <ScalarProperty Name="port" ColumnName="port" />
+                <ScalarProperty Name="host" ColumnName="host" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operater">
+            <EntityTypeMapping TypeName="Model.operater">
+              <MappingFragment StoreEntitySet="operater">
+                <ScalarProperty Name="id_operater" ColumnName="id_operater" />
+                <ScalarProperty Name="id_revizorski_tim" ColumnName="id_revizorski_tim" />
+                <ScalarProperty Name="id_kontrolor" ColumnName="id_kontrolor" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="ime" ColumnName="ime" />
+                <ScalarProperty Name="prezime" ColumnName="prezime" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="opstina">
+            <EntityTypeMapping TypeName="Model.opstina">
+              <MappingFragment StoreEntitySet="opstina">
+                <ScalarProperty Name="id_opstina" ColumnName="id_opstina" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="sifra" ColumnName="sifra" />
+                <ScalarProperty Name="prirez_stopa" ColumnName="prirez_stopa" />
+                <ScalarProperty Name="prirez_racun" ColumnName="prirez_racun" />
+                <ScalarProperty Name="sifra_m4" ColumnName="sifra_m4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="podesavanja">
+            <EntityTypeMapping TypeName="Model.podesavanja">
+              <MappingFragment StoreEntitySet="podesavanja">
+                <ScalarProperty Name="id_podesavanja" ColumnName="id_podesavanja" />
+                <ScalarProperty Name="id_operater" ColumnName="id_operater" />
+                <ScalarProperty Name="use_ftp" ColumnName="use_ftp" />
+                <ScalarProperty Name="dms_root" ColumnName="dms_root" />
+                <ScalarProperty Name="dms_ftp_user" ColumnName="dms_ftp_user" />
+                <ScalarProperty Name="dms_ftp_pass" ColumnName="dms_ftp_pass" />
+                <ScalarProperty Name="dms_ftp_server" ColumnName="dms_ftp_server" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="revizija_scheme">
+            <EntityTypeMapping TypeName="Model.revizija_scheme">
+              <MappingFragment StoreEntitySet="revizija_scheme">
+                <ScalarProperty Name="id_revizija_scheme" ColumnName="id_revizija_scheme" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+                <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="is_folder" ColumnName="is_folder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="revizorski_tim">
+            <EntityTypeMapping TypeName="Model.revizorski_tim">
+              <MappingFragment StoreEntitySet="revizorski_tim">
+                <ScalarProperty Name="id_revizorski_tim" ColumnName="id_revizorski_tim" />
+                <ScalarProperty Name="id_funkcija" ColumnName="id_funkcija" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="licenca_dms" ColumnName="licenca_dms" />
+                <ScalarProperty Name="potpis" ColumnName="potpis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="templates">
+            <EntityTypeMapping TypeName="Model.templates">
+              <MappingFragment StoreEntitySet="templates">
+                <ScalarProperty Name="id_template" ColumnName="id_template" />
+                <ScalarProperty Name="id_template_type" ColumnName="id_template_type" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="rtf" ColumnName="rtf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="templates_type">
+            <EntityTypeMapping TypeName="Model.templates_type">
+              <MappingFragment StoreEntitySet="templates_type">
+                <ScalarProperty Name="id_templates_type" ColumnName="id_templates_type" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="id_revizija_scheme" ColumnName="id_revizija_scheme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tim_funkcija">
+            <EntityTypeMapping TypeName="Model.tim_funkcija">
+              <MappingFragment StoreEntitySet="tim_funkcija">
+                <ScalarProperty Name="id_funkcija" ColumnName="id_funkcija" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bilans_stanja_view">
+            <EntityTypeMapping TypeName="Model.Bilans_stanja_view">
+              <MappingFragment StoreEntitySet="Bilans_stanja_view">
+                <ScalarProperty Name="Grupa" ColumnName="Grupa" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="Redni_broj" ColumnName="Redni broj" />
+                <ScalarProperty Name="vrijednost" ColumnName="vrijednost" />
+                <ScalarProperty Name="Prethodna" ColumnName="Prethodna" />
+                <ScalarProperty Name="id_klijent" ColumnName="id_klijent" />
+                <ScalarProperty Name="godina" ColumnName="godina" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klijent___djelatnost___sifra___opstina___drzava">
+            <EntityTypeMapping TypeName="Model.klijent___djelatnost___sifra___opstina___drzava">
+              <MappingFragment StoreEntitySet="klijent - djelatnost - sifra - opstina - drzava">
+                <ScalarProperty Name="ID_klijent" ColumnName="ID_klijent" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Sifra" ColumnName="Sifra" />
+                <ScalarProperty Name="Djelatnost" ColumnName="Djelatnost" />
+                <ScalarProperty Name="Opstina" ColumnName="Opstina" />
+                <ScalarProperty Name="Drzava" ColumnName="Drzava" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="dms_veza" TypeName="Model.dms_veza" StoreEntitySet="dms_veza">
+            <EndProperty Name="dms_file">
+              <ScalarProperty Name="id_dms_file" ColumnName="id_1" />
+            </EndProperty>
+            <EndProperty Name="dms_file1">
+              <ScalarProperty Name="id_dms_file" ColumnName="id_2" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
