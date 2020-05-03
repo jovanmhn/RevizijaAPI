@@ -17,6 +17,7 @@ namespace RevizijaAPI.Klase
             {
                 try
                 {
+
                     //Insert an image
                     DocumentImage docImage = server.Document.Images.Append(DocumentImageSource.FromImage(image));
 
