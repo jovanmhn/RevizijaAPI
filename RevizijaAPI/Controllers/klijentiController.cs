@@ -25,6 +25,7 @@ namespace RevizijaAPI.Controllers
             try
             {
                 var result = db.klijent.Select(qq => new Klase.JSONKlijent { id_klijent = qq.id_klijent, direktor_ime = qq.direktor_ime, naziv = qq.naziv, pdv = qq.pdv, PIB = qq.PIB }).ToList();
+                
                 return Ok(result);
             }
             catch (Exception)

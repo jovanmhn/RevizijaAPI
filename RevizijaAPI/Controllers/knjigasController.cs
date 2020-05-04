@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -88,12 +89,21 @@ namespace RevizijaAPI.Controllers
         {
             try
             {
-                var dms_ostalo = await db.dms_file.Where(qq => qq.id_knjiga == id_knjiga && qq.naziv == "OSTALO" && qq.is_editable == true).ToListAsync();
+                var dms_ostalo = await db.dms_file.FirstOrDefaultAsync(qq => qq.id_knjiga == id_knjiga && qq.naziv == "OSTALO" && qq.is_editable == true);
                 if (dms_ostalo != null)
                 {
                     byte[] img_array = await Request.Content.ReadAsByteArrayAsync();
                     Image x = (Bitmap)((new ImageConverter()).ConvertFrom(img_array));
-                    if (Klase.ImageToPdf.ConvertImageToPdf(x, naziv)) return Ok();
+
+                    //Image x;
+                    //using (MemoryStream m = new MemoryStream(img_array))
+                    //{
+                    //    x = Image.FromStream(m);
+                    //}
+
+                    //Image x = Image.FromFile(@"C:\Users\Jovan2\Desktop\QR PINTA.png");
+
+                    if (Klase.ImageToPdf.ConvertImageToPdf(x, naziv, dms_ostalo)) return Ok();
                     else return (InternalServerError());
                 }
                 else return NotFound();
@@ -103,6 +113,7 @@ namespace RevizijaAPI.Controllers
                 return InternalServerError(ex);
             }
         }
+
 
         // PUT: api/knjigas/5
         [ResponseType(typeof(void))]

@@ -16,7 +16,7 @@ namespace RevizijaAPI.Controllers
         public ActionResult Index()
         {
             //ViewBag.Title = "Home Page";
-            return RedirectToAspx();
+            //return RedirectToAspx();
             return View();
         }
     }
