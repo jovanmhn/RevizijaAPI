@@ -13,11 +13,11 @@ namespace RevizijaAPI.Controllers
         {
             return Redirect("~/Pages/TestHome/TestHome.aspx");
         }
-        public ActionResult Index()
-        {
-            //ViewBag.Title = "Home Page";
-            //return RedirectToAspx();
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    //ViewBag.Title = "Home Page";
+        //    //return RedirectToAspx();
+        //    return View();
+        //}
     }
 }

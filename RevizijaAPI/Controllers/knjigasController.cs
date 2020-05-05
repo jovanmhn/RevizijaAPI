@@ -83,9 +83,9 @@ namespace RevizijaAPI.Controllers
         }
 
         //Moj custom put
-        [Route("api/knjigas/upload/{id_knjiga}/{naziv}")]
+        [Route("api/knjigas/upload/{id_knjiga}/{naziv}/{id_operater}")]
         [HttpPut]
-        public async Task<IHttpActionResult> Upload2DMS(int id_knjiga, string naziv)
+        public async Task<IHttpActionResult> Upload2DMS(int id_knjiga, string naziv, int? id_operater)
         {
             try
             {
@@ -95,15 +95,7 @@ namespace RevizijaAPI.Controllers
                     byte[] img_array = await Request.Content.ReadAsByteArrayAsync();
                     Image x = (Bitmap)((new ImageConverter()).ConvertFrom(img_array));
 
-                    //Image x;
-                    //using (MemoryStream m = new MemoryStream(img_array))
-                    //{
-                    //    x = Image.FromStream(m);
-                    //}
-
-                    //Image x = Image.FromFile(@"C:\Users\Jovan2\Desktop\QR PINTA.png");
-
-                    if (Klase.ImageToPdf.ConvertImageToPdf(x, naziv, dms_ostalo)) return Ok();
+                    if (Klase.ImageToPdf.ConvertImageToPdf(x, naziv, dms_ostalo, id_operater.Value)) return Ok();
                     else return (InternalServerError());
                 }
                 else return NotFound();

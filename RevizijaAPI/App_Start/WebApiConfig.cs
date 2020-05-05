@@ -28,10 +28,10 @@ namespace RevizijaAPI
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            //config.Routes.MapHttpRoute(
-            //    name: "Login",
-            //    routeTemplate: "api/operater/login/{username}/{password}"
-            //);
+            //var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            //config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+
+
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RevizijaAPI.Klase
     public static class ImageToPdf
     {
 
-        public static bool ConvertImageToPdf(Image image, string naziv, RevizijaAPI.Models.Database.dms_file folderOstalo)
+        public static bool ConvertImageToPdf(Image image, string naziv, RevizijaAPI.Models.Database.dms_file folderOstalo, int id_operater)
         {
             using (RichEditDocumentServer server = new RichEditDocumentServer())
             {
@@ -29,7 +29,7 @@ namespace RevizijaAPI.Klase
                     server.Document.Sections[0].Page.Width = docImage.Size.Width + server.Document.Sections[0].Margins.Right + server.Document.Sections[0].Margins.Left;
                     server.Document.Sections[0].Page.Height = docImage.Size.Height + server.Document.Sections[0].Margins.Top + server.Document.Sections[0].Margins.Bottom;
 
-                    var result = Upload2DMS(folderOstalo, naziv, image);
+                    var result = Upload2DMS(folderOstalo, naziv, image, id_operater);
                     if (result.result)
                     {
                         using (FileStream fs = new FileStream(System.Web.Hosting.HostingEnvironment.MapPath($"~\\Uploads\\{result.guid}"), FileMode.OpenOrCreate))
@@ -47,7 +47,7 @@ namespace RevizijaAPI.Klase
             }
         }
 
-        private static UploadReturn Upload2DMS(dms_file folderOstalo, string naziv, Image image)
+        private static UploadReturn Upload2DMS(dms_file folderOstalo, string naziv, Image image, int id_operater)
         {
             dms_file fajl;
             try
@@ -65,7 +65,7 @@ namespace RevizijaAPI.Klase
                     guid = Guid.NewGuid().ToString(),
                     guid_parent = folderOstalo.guid,
                     created = DateTime.Now,
-                    //id_operater = Pomocnik.logovani_operater.id_operater,
+                    id_operater = id_operater,
                     id_knjiga = folderOstalo.id_knjiga,
                     id_revizija_scheme = folderOstalo.id_revizija_scheme,
                 };
